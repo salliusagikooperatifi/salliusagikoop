@@ -53,38 +53,6 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      {/* İstatistikler */}
-      <Section background="white" padding="lg">
-        <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-green-600 mb-2">
-                6
-              </div>
-              <div className="text-gray-600">Aktif Proje</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">
-                50+
-              </div>
-              <div className="text-gray-600">Kooperatif Üyesi</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-yellow-600 mb-2">
-                15M+
-              </div>
-              <div className="text-gray-600">TL Yatırım</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-purple-600 mb-2">
-                5
-              </div>
-              <div className="text-gray-600">Yıllık Deneyim</div>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
       {/* Öne Çıkan Projeler */}
       <Section background="gray" padding="xl">
         <Container>
@@ -94,7 +62,7 @@ export default function HomePage() {
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Sürdürülebilir kalkınma hedeflerimiz doğrultusunda hayata
-              geçirdiğimiz önemli projelerimizi keşfedin.
+              geçirdiğimiz önemli projelerimizi keşfedin
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -312,12 +280,6 @@ export default function HomePage() {
               kalkınmaya katkıda bulunun ve üretim faaliyetlerinizi geliştirin.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/uyelerimiz"
-                className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200"
-              >
-                Üye Ol
-              </Link>
               <Link
                 href="/iletisim"
                 className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors duration-200"

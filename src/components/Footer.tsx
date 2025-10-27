@@ -19,26 +19,26 @@ const Footer = () => {
       { name: "El Sanatları", href: "/projeler/el-sanatlari-hali-kilim" },
       { name: "Eğitim ve Spor", href: "/projeler/egitim-spor-merkezi" },
     ],
-    Kurumsal: [
+    Sayfalar: [
       { name: "Üyelerimiz", href: "/uyelerimiz" },
       { name: "Yönetim", href: "/yonetim" },
       { name: "Duyurular", href: "/duyurular" },
       { name: "Haberler", href: "/haberler" },
+      { name: "İletişim", href: "/iletisim" },
     ],
-    İletişim: [
-      { name: "Adres", href: "/iletisim#adres" },
-      { name: "Telefon", href: "/iletisim#telefon" },
-      { name: "E-posta", href: "/iletisim#eposta" },
-      { name: "Harita", href: "/iletisim#harita" },
+    "İletişim Bilgileri": [
+      { name: "Adres", href: "#", type: "address" },
+      { name: "E-posta", href: "#", type: "email" },
+      { name: "Telefon", href: "#", type: "phone" },
     ],
   };
 
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Logo ve Açıklama */}
-          <div className="lg:col-span-1">
+          <div>
             <div className="flex items-center mb-4">
               <div className="h-10 w-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">Ş</span>
@@ -49,15 +49,17 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-gray-400 text-sm mb-4">
-              Bölgemizde sürdürülebilir tarım ve üretim faaliyetlerini
-              destekleyerek, üyelerimizin refahını artırmayı ve toplumsal
-              kalkınmaya katkıda bulunmayı hedefliyoruz.
+              Sürdürülebilir tarım ve üretim faaliyetleriyle bölgesel kalkınmaya
+              katkı sağlayan bir kooperatifiz.
             </p>
+            {/* Sosyal Medya */}
             <div className="flex space-x-4">
               {contactInfo.socialMedia.facebook && (
                 <a
                   href={contactInfo.socialMedia.facebook}
                   className="text-gray-400 hover:text-white transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <span className="sr-only">Facebook</span>
                   <svg
@@ -73,6 +75,8 @@ const Footer = () => {
                 <a
                   href={contactInfo.socialMedia.twitter}
                   className="text-gray-400 hover:text-white transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <span className="sr-only">Twitter</span>
                   <svg
@@ -88,6 +92,8 @@ const Footer = () => {
                 <a
                   href={contactInfo.socialMedia.instagram}
                   className="text-gray-400 hover:text-white transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <span className="sr-only">Instagram</span>
                   <svg
@@ -104,17 +110,93 @@ const Footer = () => {
 
           {/* Footer Links */}
           {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
+            <div key={category} className="col-span-1">
               <h3 className="text-lg font-semibold mb-4">{category}</h3>
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors text-sm"
-                    >
-                      {link.name}
-                    </Link>
+                    {category === "İletişim Bilgileri" ? (
+                      <div className="text-gray-400 text-sm">
+                        {"type" in link && link.type === "address" && (
+                          <div>
+                            <div className="text-gray-400 text-sm">
+                              Şehit Nurettin Ademoğlu Mahallesi
+                              <br />
+                              A.Şevket Özok Caddesi No:10/1
+                              <br />
+                              PAZARCIK/KAHRAMANMARAŞ
+                            </div>
+                          </div>
+                        )}
+                        {"type" in link && link.type === "email" && (
+                          <div>
+                            <a
+                              href="mailto:info@salliusagicoop.com"
+                              className="hover:text-white transition-colors text-gray-400 text-sm"
+                            >
+                              info@salliusagicoop.com
+                            </a>
+                          </div>
+                        )}
+                        {"type" in link && link.type === "phone" && (
+                          <div>
+                            <div className="text-gray-400 text-xs space-y-0.5">
+                              <div className="flex flex-wrap">
+                                <span className="text-gray-300 text-xs">
+                                  İbrahim Çavaş:
+                                </span>
+                                <a
+                                  href="tel:+4915231382552"
+                                  className="hover:text-white transition-colors ml-1 text-xs"
+                                >
+                                  +49 1523 1382552
+                                </a>
+                              </div>
+                              <div className="flex flex-wrap">
+                                <span className="text-gray-300 text-xs">
+                                  Kasım Şapkur:
+                                </span>
+                                <a
+                                  href="tel:+491711260485"
+                                  className="hover:text-white transition-colors ml-1 text-xs"
+                                >
+                                  +49 171 1260485
+                                </a>
+                              </div>
+                              <div className="flex flex-wrap">
+                                <span className="text-gray-300 text-xs">
+                                  Ali Oğuz:
+                                </span>
+                                <a
+                                  href="tel:+905457304518"
+                                  className="hover:text-white transition-colors ml-1 text-xs"
+                                >
+                                  +90 545 730 45 18
+                                </a>
+                              </div>
+                              <div className="flex flex-wrap">
+                                <span className="text-gray-300 text-xs">
+                                  Tahir Çavaş:
+                                </span>
+                                <a
+                                  href="tel:+4917685650986"
+                                  className="hover:text-white transition-colors ml-1 text-xs"
+                                >
+                                  +49 176 85650986
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-gray-400 hover:text-white transition-colors text-sm"
+                      >
+                        {link.name}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -122,44 +204,9 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* İletişim Bilgileri */}
-        <div className="mt-8 pt-8 border-t border-gray-800">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <h4 className="font-semibold mb-2">Adres</h4>
-              <p className="text-gray-400 text-sm">
-                {contactInfo.address.street}
-                <br />
-                {contactInfo.address.district}, {contactInfo.address.city}
-                <br />
-                {contactInfo.address.postalCode} {contactInfo.address.country}
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">İletişim</h4>
-              <p className="text-gray-400 text-sm">
-                Tel: {contactInfo.phone.primary}
-                <br />
-                E-posta: {contactInfo.email.primary}
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Çalışma Saatleri</h4>
-              <p className="text-gray-400 text-sm">
-                Hafta İçi: {contactInfo.workingHours.weekdays}
-                <br />
-                {contactInfo.workingHours.saturday &&
-                  `Cumartesi: ${contactInfo.workingHours.saturday}`}
-                {contactInfo.workingHours.sunday &&
-                  `Pazar: ${contactInfo.workingHours.sunday}`}
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* Copyright */}
-        <div className="mt-8 pt-8 border-t border-gray-800 text-center">
-          <p className="text-gray-400 text-sm">
+        <div className="mt-8 pt-8 border-t border-gray-800 text-right">
+          <p className="text-gray-400 text-xs">
             © {currentYear} Şallıuşağı Üretim ve Pazarlama Kooperatifi. Tüm
             hakları saklıdır.
           </p>

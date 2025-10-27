@@ -28,20 +28,12 @@ const ProjectCard = ({ project, className = "" }: ProjectCardProps) => {
     >
       {/* Proje Görseli */}
       <div className="relative h-48 w-full">
-        {project.images && project.images.length > 0 ? (
-          <Image
-            src={project.images[0]}
-            alt={project.title}
-            fill
-            className="object-cover"
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center">
-            <span className="text-white text-4xl font-bold">
-              {project.title.charAt(0)}
-            </span>
-          </div>
-        )}
+        <Image
+          src={project.images?.[0] || "/images/no-image.png"}
+          alt={project.title}
+          fill
+          className="object-cover"
+        />
         <div className="absolute top-4 right-4">
           <span
             className={`px-2 py-1 rounded-full text-xs font-medium ${

@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -9,17 +7,10 @@ import { mockAnnouncements } from "@/lib/mockData";
 import { BreadcrumbItem } from "@/lib/types";
 
 export default function AnnouncementsPage() {
-  const [filter, setFilter] = useState<"all" | "important">("all");
-
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Anasayfa", href: "/" },
     { label: "Duyurular", href: "/duyurular", isCurrent: true },
   ];
-
-  const filteredAnnouncements =
-    filter === "important"
-      ? mockAnnouncements.filter((announcement) => announcement.isImportant)
-      : mockAnnouncements;
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -40,7 +31,7 @@ export default function AnnouncementsPage() {
       </Section>
 
       {/* Hero Section */}
-      <Section background="white" padding="xl">
+      <Section background="white" padding="lg">
         <Container>
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -55,42 +46,11 @@ export default function AnnouncementsPage() {
         </Container>
       </Section>
 
-      {/* Filtreler */}
-      <Section background="gray" padding="lg">
-        <Container>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex flex-wrap gap-4">
-              <button
-                onClick={() => setFilter("all")}
-                className={`px-6 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                  filter === "all"
-                    ? "bg-green-600 text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                Tüm Duyurular ({mockAnnouncements.length})
-              </button>
-              <button
-                onClick={() => setFilter("important")}
-                className={`px-6 py-2 rounded-lg font-medium transition-colors duration-200 ${
-                  filter === "important"
-                    ? "bg-red-600 text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                Önemli Duyurular (
-                {mockAnnouncements.filter((a) => a.isImportant).length})
-              </button>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
       {/* Duyurular Listesi */}
-      <Section background="white" padding="xl">
+      <Section background="gray" padding="xl">
         <Container>
           <div className="space-y-6">
-            {filteredAnnouncements.map((announcement) => (
+            {mockAnnouncements.map((announcement) => (
               <div
                 key={announcement.id}
                 className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
@@ -109,49 +69,19 @@ export default function AnnouncementsPage() {
                         </span>
                       </div>
                       <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                        <Link
-                          href={`/duyurular/${announcement.slug}`}
-                          className="hover:text-green-600 transition-colors duration-200"
-                        >
-                          {announcement.title}
-                        </Link>
+                        {announcement.title}
                       </h3>
-                      <p className="text-gray-600 mb-4 line-clamp-3">
+                      <p className="text-gray-600 mb-4">
                         {announcement.excerpt}
                       </p>
                     </div>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center text-sm text-gray-500">
-                      <span>Yazar: {announcement.author}</span>
-                    </div>
-                    <Link
-                      href={`/duyurular/${announcement.slug}`}
-                      className="text-green-600 hover:text-green-700 font-medium flex items-center"
-                    >
-                      Devamını Oku
-                      <svg
-                        className="w-4 h-4 ml-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </Link>
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          {filteredAnnouncements.length === 0 && (
+          {mockAnnouncements.length === 0 && (
             <div className="text-center py-12">
               <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg
@@ -194,7 +124,7 @@ export default function AnnouncementsPage() {
               <input
                 type="email"
                 placeholder="E-posta adresiniz"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white"
+                className="flex-1 px-4 py-3 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white"
               />
               <button className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200">
                 Abone Ol

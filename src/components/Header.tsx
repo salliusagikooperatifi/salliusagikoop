@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { colors } from "@/lib/colors";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const navigation = [
     { name: "Anasayfa", href: "/" },
@@ -54,7 +55,11 @@ const Header = () => {
               <div key={item.name} className="relative group">
                 <Link
                   href={item.href}
-                  className="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+                  className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+                    pathname === item.href
+                      ? "text-green-600"
+                      : "text-gray-700 hover:text-green-600"
+                  }`}
                 >
                   {item.name}
                 </Link>
@@ -65,7 +70,11 @@ const Header = () => {
                         <Link
                           key={subItem.name}
                           href={subItem.href}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 transition-colors duration-200"
+                          className={`block px-4 py-2 text-sm transition-colors duration-200 ${
+                            pathname === subItem.href
+                              ? "text-green-600 bg-green-50"
+                              : "text-gray-700 hover:bg-green-50 hover:text-green-600"
+                          }`}
                         >
                           {subItem.name}
                         </Link>
@@ -117,7 +126,11 @@ const Header = () => {
                 <div key={item.name}>
                   <Link
                     href={item.href}
-                    className="text-gray-700 hover:text-green-600 block px-3 py-2 text-base font-medium"
+                    className={`block px-3 py-2 text-base font-medium transition-colors duration-200 ${
+                      pathname === item.href
+                        ? "text-green-600"
+                        : "text-gray-700 hover:text-green-600"
+                    }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
@@ -128,7 +141,11 @@ const Header = () => {
                         <Link
                           key={subItem.name}
                           href={subItem.href}
-                          className="text-gray-600 hover:text-green-600 block px-3 py-2 text-sm"
+                          className={`block px-3 py-2 text-sm transition-colors duration-200 ${
+                            pathname === subItem.href
+                              ? "text-green-600"
+                              : "text-gray-600 hover:text-green-600"
+                          }`}
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {subItem.name}

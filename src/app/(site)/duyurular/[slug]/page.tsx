@@ -4,6 +4,7 @@ import Section from "@/components/Section";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { mockAnnouncements } from "@/lib/mockData";
 import { BreadcrumbItem } from "@/lib/types";
+import Link from "next/link";
 
 interface AnnouncementDetailPageProps {
   params: {
@@ -49,7 +50,7 @@ export default function AnnouncementDetailPage({
       </Section>
 
       {/* Hero Section */}
-      <Section background="white" padding="xl">
+      <Section background="white" padding="lg">
         <Container>
           <div className="max-w-4xl mx-auto">
             <div className="mb-6">
@@ -156,7 +157,7 @@ export default function AnnouncementDetailPage({
         <Container>
           <div className="max-w-4xl mx-auto">
             <div className="flex flex-col sm:flex-row gap-4 justify-between">
-              <a
+              <Link
                 href="/duyurular"
                 className="inline-flex items-center px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors duration-200"
               >
@@ -174,7 +175,7 @@ export default function AnnouncementDetailPage({
                   />
                 </svg>
                 Tüm Duyurular
-              </a>
+              </Link>
               <a
                 href="/iletisim"
                 className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors duration-200"

@@ -63,20 +63,12 @@ const NewsCard = ({
         className={`bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 ${className}`}
       >
         <div className="relative h-64 w-full">
-          {news.featuredImage ? (
-            <Image
-              src={news.featuredImage}
-              alt={news.title}
-              fill
-              className="object-cover"
-            />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-blue-400 to-green-500 flex items-center justify-center">
-              <span className="text-white text-4xl font-bold">
-                {news.title.charAt(0)}
-              </span>
-            </div>
-          )}
+          <Image
+            src={news.featuredImage || "/images/no-image.png"}
+            alt={news.title}
+            fill
+            className="object-cover"
+          />
           <div className="absolute top-4 left-4">
             <span className="px-3 py-1 bg-green-600 text-white text-sm font-medium rounded-full">
               Öne Çıkan
@@ -121,20 +113,12 @@ const NewsCard = ({
       className={`bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 ${className}`}
     >
       <div className="relative h-48 w-full">
-        {news.featuredImage ? (
-          <Image
-            src={news.featuredImage}
-            alt={news.title}
-            fill
-            className="object-cover"
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-green-400 to-blue-500 flex items-center justify-center">
-            <span className="text-white text-3xl font-bold">
-              {news.title.charAt(0)}
-            </span>
-          </div>
-        )}
+        <Image
+          src={news.featuredImage || "/images/no-image.png"}
+          alt={news.title}
+          fill
+          className="object-cover"
+        />
       </div>
       <div className="p-6">
         <div className="mb-3">

@@ -62,7 +62,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
       </Section>
 
       {/* Hero Section */}
-      <Section background="white" padding="xl">
+      <Section background="white" padding="lg">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -192,22 +192,14 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
 
             {/* Proje Görseli */}
             <div className="relative">
-              {project.images && project.images.length > 0 ? (
-                <div className="relative h-96 w-full rounded-lg overflow-hidden">
-                  <Image
-                    src={project.images[0]}
-                    alt={project.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ) : (
-                <div className="h-96 w-full bg-gradient-to-br from-green-400 to-blue-500 rounded-lg flex items-center justify-center">
-                  <span className="text-white text-6xl font-bold">
-                    {project.title.charAt(0)}
-                  </span>
-                </div>
-              )}
+              <div className="relative h-96 w-full rounded-lg overflow-hidden">
+                <Image
+                  src={project.images?.[0] || "/images/no-image.png"}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </div>
           </div>
         </Container>

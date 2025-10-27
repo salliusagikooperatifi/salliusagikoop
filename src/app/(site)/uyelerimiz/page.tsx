@@ -26,7 +26,7 @@ export default function MembersPage() {
       </Section>
 
       {/* Hero Section */}
-      <Section background="white" padding="xl">
+      <Section background="white" padding="lg">
         <Container>
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -73,7 +73,7 @@ export default function MembersPage() {
       </Section>
 */}
       {/* Üyeler Listesi */}
-      <Section background="white" padding="xl">
+      <Section background="gray" padding="xl">
         <Container>
           {/*}
           <div className="text-center mb-12">
