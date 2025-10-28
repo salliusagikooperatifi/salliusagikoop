@@ -20,34 +20,27 @@ export default function ContactPage() {
       </Section>
 
       {/* Hero Section */}
-      <Section background="white" padding="lg">
+      <Section background="white" padding="md">
         <Container>
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               İletişim
             </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Bizimle iletişime geçmek için aşağıdaki bilgileri
+              kullanabilirsiniz
+            </p>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Bizimle iletişime geçin. Sorularınız, önerileriniz veya işbirliği
-              teklifleriniz için bize ulaşabilirsiniz. Size en kısa sürede dönüş
-              yapacağız.
+              Sorularınız, önerileriniz veya işbirliği teklifleriniz için bize
+              ulaşabilirsiniz. Size en kısa sürede dönüş yapacağız.
             </p>
           </div>
         </Container>
       </Section>
 
       {/* İletişim Bilgileri */}
-      <Section background="gray" padding="xl">
+      <Section background="gray" padding="lg">
         <Container>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              İletişim Bilgileri
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Bizimle iletişime geçmek için aşağıdaki bilgileri
-              kullanabilirsiniz
-            </p>
-          </div>
-
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Adres */}

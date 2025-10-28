@@ -76,7 +76,7 @@ export interface NewsItem {
   slug: string;
   content: string;
   excerpt: string;
-  author: string;
+  author?: string;
   publishedAt: string;
   updatedAt: string;
   featuredImage?: string;
@@ -84,20 +84,18 @@ export interface NewsItem {
   tags: string[];
   isPublished: boolean;
   isFeatured: boolean;
-  views: number;
 }
 
 export interface Announcement {
   id: string;
   title: string;
-  slug: string;
   content: string;
-  excerpt: string;
-  author: string;
-  publishedAt: string;
-  updatedAt: string;
+  date: string;
+  published: boolean;
+  createdAt: Date;
+  updatedAt: Date;
   isImportant: boolean;
-  isPublished: boolean;
+  author: string;
   attachments?: Document[];
 }
 

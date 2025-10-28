@@ -48,7 +48,7 @@ const NewsCard = ({
               </Link>
             </h3>
             <p className="text-xs text-gray-500 mb-2">
-              {formatDate(news.publishedAt)} • {news.views} görüntülenme
+              {formatDate(news.publishedAt)}
             </p>
             <p className="text-xs text-gray-600 line-clamp-2">{news.excerpt}</p>
           </div>
@@ -89,11 +89,9 @@ const NewsCard = ({
           </div>
           <div className="flex items-center justify-between text-sm text-gray-500">
             <div className="flex items-center space-x-4">
-              <span>{news.author}</span>
-              <span>•</span>
+              {news.author && <span>{news.author}</span>}
+              {news.author && <span>•</span>}
               <span>{formatDate(news.publishedAt)}</span>
-              <span>•</span>
-              <span>{news.views} görüntülenme</span>
             </div>
             <Link
               href={`/haberler/${news.slug}`}
@@ -134,11 +132,10 @@ const NewsCard = ({
         </div>
         <div className="flex items-center justify-between text-sm text-gray-500">
           <div className="flex items-center space-x-2">
-            <span>{news.author}</span>
-            <span>•</span>
+            {news.author && <span>{news.author}</span>}
+            {news.author && <span>•</span>}
             <span>{formatDate(news.publishedAt)}</span>
           </div>
-          <span>{news.views} görüntülenme</span>
         </div>
         {news.tags && news.tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1">

@@ -4,12 +4,13 @@ import Container from "@/components/Container";
 import Section from "@/components/Section";
 import ProjectCard from "@/components/cards/ProjectCard";
 import NewsCard from "@/components/cards/NewsCard";
+import AnnouncementCard from "@/components/cards/AnnouncementCard";
 import { mockProjects, mockNews, mockAnnouncements } from "@/lib/mockData";
 
 export default function HomePage() {
-  const featuredProjects = mockProjects
-    .filter((project) => project.status === "active")
-    .slice(0, 3);
+  const featuredProjects = mockProjects.filter(
+    (project) => project.hierarchy === "main"
+  );
   const featuredNews = mockNews.filter((news) => news.isFeatured).slice(0, 1);
   const recentNews = mockNews.filter((news) => !news.isFeatured).slice(0, 3);
   const importantAnnouncements = mockAnnouncements
@@ -58,11 +59,11 @@ export default function HomePage() {
         <Container>
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Öne Çıkan Projelerimiz
+              Projelerimiz
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Sürdürülebilir kalkınma hedeflerimiz doğrultusunda hayata
-              geçirdiğimiz önemli projelerimizi keşfedin
+              geçirdiğimiz ana projelerimizi keşfedin
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -75,7 +76,7 @@ export default function HomePage() {
               href="/projeler"
               className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors duration-200"
             >
-              Tüm Projeleri Görüntüle
+              Tüm Projeleri İncele
               <svg
                 className="w-5 h-5 ml-2"
                 fill="none"
@@ -172,47 +173,10 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {importantAnnouncements.map((announcement) => (
-              <div
+              <AnnouncementCard
                 key={announcement.id}
-                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
-              >
-                <div className="flex items-start mb-4">
-                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                    <svg
-                      className="w-4 h-4 text-red-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
-                      {announcement.title}
-                    </h3>
-                    <p className="text-sm text-gray-500">
-                      {new Date(announcement.publishedAt).toLocaleDateString(
-                        "tr-TR"
-                      )}
-                    </p>
-                  </div>
-                </div>
-                <p className="text-gray-600 text-sm line-clamp-3 mb-4">
-                  {announcement.excerpt}
-                </p>
-                <Link
-                  href={`/duyurular/${announcement.slug}`}
-                  className="text-green-600 hover:text-green-700 text-sm font-medium"
-                >
-                  Devamını Oku →
-                </Link>
-              </div>
+                announcement={announcement}
+              />
             ))}
           </div>
         </Container>

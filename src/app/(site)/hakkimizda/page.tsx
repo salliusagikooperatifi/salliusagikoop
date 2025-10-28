@@ -19,7 +19,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Hero Section */}
-      <Section background="white" padding="lg">
+      <Section background="white" padding="md">
         <Container>
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">

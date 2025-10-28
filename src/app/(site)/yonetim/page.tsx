@@ -20,6 +20,7 @@ export default function ManagementPage() {
       </Section>
 
       {/* Hero Section */}
+      {/*
       <Section background="white" padding="lg">
         <Container>
           <div className="text-center max-w-4xl mx-auto">
@@ -34,7 +35,7 @@ export default function ManagementPage() {
           </div>
         </Container>
       </Section>
-
+      */}
       {/* Yönetim Kurulu */}
       <Section background="white" padding="xl">
         <Container>
@@ -52,10 +53,10 @@ export default function ManagementPage() {
             <table className="w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 bg-gray-300 uppercase tracking-wider">
                     Ad Soyad
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 bg-gray-300 uppercase tracking-wider">
                     Ünvan
                   </th>
                 </tr>
@@ -94,10 +95,10 @@ export default function ManagementPage() {
             <table className="w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 bg-gray-300 uppercase tracking-wider">
                     Ad Soyad
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 bg-gray-300 uppercase tracking-wider">
                     Ünvan
                   </th>
                 </tr>

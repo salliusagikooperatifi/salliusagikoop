@@ -19,6 +19,8 @@ const ProjectCard = ({ project, className = "" }: ProjectCardProps) => {
           alt={project.title}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
         />
       </div>
 
@@ -26,10 +28,10 @@ const ProjectCard = ({ project, className = "" }: ProjectCardProps) => {
       <div className="flex flex-col flex-1 p-6 justify-between">
         {/* Başlık + Açıklama */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3.2rem]">
+          <h3 className="text-xl font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3.2rem]">
             {project.title}
           </h3>
-          <p className="text-gray-600 text-sm line-clamp-2 min-h-[2.8rem]">
+          <p className="text-gray-600 text-base line-clamp-2 min-h-[2.8rem]">
             {project.shortDescription}
           </p>
         </div>

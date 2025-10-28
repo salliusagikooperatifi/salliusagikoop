@@ -23,7 +23,7 @@ export default function NewsPage() {
       </Section>
 
       {/* Hero Section */}
-      <Section background="white" padding="lg">
+      <Section background="white" padding="md">
         <Container>
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -42,7 +42,7 @@ export default function NewsPage() {
       <Section background="gray" padding="xl">
         <Container>
           {mockNews.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {mockNews.map((news) => (
                 <NewsCard key={news.id} news={news} />
               ))}
