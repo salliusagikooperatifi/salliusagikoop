@@ -20,6 +20,15 @@ export interface Project {
   documents?: Document[];
   createdAt: string;
   updatedAt: string;
+  // Hierarchy support for main/sub projects
+  hierarchy?: "main" | "sub";
+  parentId?: string;
+  children?: string[];
+  // Optional display metadata
+  coverImage?: string;
+  icon?: string;
+  tags?: string[];
+  startYear?: number;
 }
 
 export type ProjectCategory =
