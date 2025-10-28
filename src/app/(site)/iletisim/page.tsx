@@ -46,7 +46,7 @@ export default function ContactPage() {
               {/* Adres */}
               <div className="bg-white p-8 rounded-lg shadow-md">
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4 shrink-0">
                     <svg
                       className="w-6 h-6 text-green-600"
                       fill="none"
@@ -85,7 +85,7 @@ export default function ContactPage() {
               {/* E-posta */}
               <div className="bg-white p-8 rounded-lg shadow-md">
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mr-4 shrink-0">
                     <svg
                       className="w-6 h-6 text-yellow-600"
                       fill="none"
@@ -142,7 +142,7 @@ export default function ContactPage() {
             {/* Telefon Numaraları */}
             <div className="mt-8 bg-white p-8 rounded-lg shadow-md">
               <div className="flex items-start">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4 shrink-0">
                   <svg
                     className="w-6 h-6 text-blue-600"
                     fill="none"
@@ -162,65 +162,61 @@ export default function ContactPage() {
                     Telefon Numaraları
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-medium text-gray-900 text-sm">
-                            İbrahim Çavaş
-                          </h4>
-                          <p className="text-xs text-gray-600">Başkan</p>
-                        </div>
-                        <a
-                          href="tel:+4915231382552"
-                          className="text-blue-600 hover:text-green-600 transition-colors font-medium text-sm whitespace-nowrap ml-2"
-                        >
-                          +49 1523 1382552
-                        </a>
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-medium text-gray-900 text-sm">
+                          İbrahim Çavaş
+                        </h4>
+                        <p className="text-xs text-gray-600">Başkan</p>
                       </div>
-                      <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-medium text-gray-900 text-sm">
-                            Tahir Çavaş
-                          </h4>
-                          <p className="text-xs text-gray-600">Üye</p>
-                        </div>
-                        <a
-                          href="tel:+4917685650986"
-                          className="text-blue-600 hover:text-green-600 transition-colors font-medium text-sm whitespace-nowrap ml-2"
-                        >
-                          +49 176 85650986
-                        </a>
-                      </div>
+                      <a
+                        href="tel:+4915231382552"
+                        className="text-blue-600 hover:text-green-600 transition-colors font-medium text-sm whitespace-nowrap ml-2"
+                      >
+                        +49 1523 1382552
+                      </a>
                     </div>
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-medium text-gray-900 text-sm">
-                            Kasım Şapkur
-                          </h4>
-                          <p className="text-xs text-gray-600">Başkan Yrd.</p>
-                        </div>
-                        <a
-                          href="tel:+491711260485"
-                          className="text-blue-600 hover:text-green-600 transition-colors font-medium text-sm whitespace-nowrap ml-2"
-                        >
-                          +49 171 1260485
-                        </a>
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-medium text-gray-900 text-sm">
+                          Kasım Şapkur
+                        </h4>
+                        <p className="text-xs text-gray-600">Başkan Yrd.</p>
                       </div>
-                      <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-medium text-gray-900 text-sm">
-                            Ali Oğuz
-                          </h4>
-                          <p className="text-xs text-gray-600">Muhasip Üye</p>
-                        </div>
-                        <a
-                          href="tel:+905457304518"
-                          className="text-blue-600 hover:text-green-600 transition-colors font-medium text-sm whitespace-nowrap ml-2"
-                        >
-                          +90 545 730 45 18
-                        </a>
+                      <a
+                        href="tel:+491711260485"
+                        className="text-blue-600 hover:text-green-600 transition-colors font-medium text-sm whitespace-nowrap ml-2"
+                      >
+                        +49 171 1260485
+                      </a>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-medium text-gray-900 text-sm">
+                          Ali Oğuz
+                        </h4>
+                        <p className="text-xs text-gray-600">Muhasip Üye</p>
                       </div>
+                      <a
+                        href="tel:+905457304518"
+                        className="text-blue-600 hover:text-green-600 transition-colors font-medium text-sm whitespace-nowrap ml-2"
+                      >
+                        +90 545 730 45 18
+                      </a>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-medium text-gray-900 text-sm">
+                          Tahir Çavaş
+                        </h4>
+                        <p className="text-xs text-gray-600">Üye</p>
+                      </div>
+                      <a
+                        href="tel:+4917685650986"
+                        className="text-blue-600 hover:text-green-600 transition-colors font-medium text-sm whitespace-nowrap ml-2"
+                      >
+                        +49 176 85650986
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -254,11 +250,7 @@ export default function ContactPage() {
           </div>
 
           <div className="mt-4 text-center">
-            <p className="text-sm text-gray-500">
-              Koordinatlar: {contactInfo.coordinates.lat},{" "}
-              {contactInfo.coordinates.lng}
-            </p>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-sm text-gray-400 mt-1">
               Şehit Nurettin Ademoğlu Mahallesi, A.Şevket Özok Caddesi No:10/1,
               PAZARCIK/KAHRAMANMARAŞ
             </p>

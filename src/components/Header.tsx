@@ -278,7 +278,7 @@ const Header = () => {
                                 <Link
                                   key={child.name}
                                   href={child.href}
-                                  className={`block px-3 py-1 text-sm rounded transition-colors duration-200 ${
+                                  className={`block px-3 py-1 text-sm font-bold rounded transition-colors duration-200 ${
                                     pathname === child.href
                                       ? "text-green-600 bg-green-50"
                                       : "text-gray-700 hover:bg-green-50 hover:text-green-700"
