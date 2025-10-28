@@ -17,8 +17,10 @@ const categoryLabels: Record<ProjectCategory, string> = {
 };
 
 interface CategoryPageProps {
-  params: { category: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: Promise<{ category: string }> | { category: string };
+  searchParams?:
+    | Promise<{ [key: string]: string | string[] | undefined }>
+    | { [key: string]: string | string[] | undefined };
 }
 
 function slugify(input: string): string {
@@ -48,11 +50,16 @@ const subcategoryMap: Partial<Record<ProjectCategory, string[]>> = {
   "el-sanatlari-hali-kilim": ["El Sanatları Üretim Merkezi"],
 };
 
-export default function CategoryPage({
+export default async function CategoryPage({
   params,
   searchParams,
 }: CategoryPageProps) {
-  const category = params.category as ProjectCategory;
+  const resolvedParams = params instanceof Promise ? await params : params;
+  const resolvedSearchParams =
+    searchParams && searchParams instanceof Promise
+      ? await searchParams
+      : searchParams;
+  const category = resolvedParams.category as ProjectCategory;
 
   if (!Object.keys(categoryLabels).includes(category)) {
     notFound();
@@ -70,7 +77,9 @@ export default function CategoryPage({
   }));
 
   const selectedSub =
-    typeof searchParams?.alt === "string" ? searchParams?.alt : undefined;
+    typeof resolvedSearchParams?.alt === "string"
+      ? resolvedSearchParams?.alt
+      : undefined;
   const activeSubOption = subcategoryOptions.find(
     (s) => s.value === selectedSub
   );

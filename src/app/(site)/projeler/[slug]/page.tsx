@@ -5,23 +5,38 @@ import Section from "@/components/Section";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { mockProjects } from "@/lib/mockData";
 import { BreadcrumbItem } from "@/lib/types";
+import ProjectCard from "@/components/cards/ProjectCard";
+import Link from "next/link";
 
 interface ProjectDetailPageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }> | { slug: string };
 }
 
-export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
-  const project = mockProjects.find((p) => p.slug === params.slug);
+export default async function ProjectDetailPage({
+  params,
+}: ProjectDetailPageProps) {
+  const resolvedParams = params instanceof Promise ? await params : params;
+  const project = mockProjects.find((p) => p.slug === resolvedParams.slug);
 
   if (!project) {
     notFound();
   }
 
+  const parentProject = project.parentId
+    ? mockProjects.find((p) => p.id === project.parentId)
+    : undefined;
+
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Anasayfa", href: "/" },
     { label: "Projelerimiz", href: "/projeler" },
+    ...(parentProject
+      ? [
+          {
+            label: parentProject.title,
+            href: `/projeler/${parentProject.slug}`,
+          },
+        ]
+      : []),
     {
       label: project.title,
       href: `/projeler/${project.slug}`,
@@ -43,14 +58,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
     paused: "Duraklatıldı",
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("tr-TR", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
+  // tarih formatlayıcı şimdilik kullanılmıyor
 
   return (
     <div className="min-h-screen">
@@ -114,79 +122,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
                   </div>
                 )}
 
-                {project.budget && (
-                  <div className="flex items-center">
-                    <svg
-                      className="w-5 h-5 text-gray-400 mr-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-                      />
-                    </svg>
-                    <div>
-                      <div className="text-sm text-gray-500">Bütçe</div>
-                      <div className="font-medium text-gray-900">
-                        {project.budget.toLocaleString("tr-TR")} TL
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {project.startDate && (
-                  <div className="flex items-center">
-                    <svg
-                      className="w-5 h-5 text-gray-400 mr-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
-                    </svg>
-                    <div>
-                      <div className="text-sm text-gray-500">
-                        Başlangıç Tarihi
-                      </div>
-                      <div className="font-medium text-gray-900">
-                        {formatDate(project.startDate)}
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {project.endDate && (
-                  <div className="flex items-center">
-                    <svg
-                      className="w-5 h-5 text-gray-400 mr-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
-                    </svg>
-                    <div>
-                      <div className="text-sm text-gray-500">Bitiş Tarihi</div>
-                      <div className="font-medium text-gray-900">
-                        {formatDate(project.endDate)}
-                      </div>
-                    </div>
-                  </div>
-                )}
+                {/* Bütçe ve tarihler şimdilik gizlendi */}
               </div>
             </div>
 
@@ -262,7 +198,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {project.benefits.map((benefit, index) => (
                 <div key={index} className="flex items-start">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 shrink-0">
                     <svg
                       className="w-4 h-4 text-blue-600"
                       fill="none"
@@ -333,16 +269,72 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
               >
                 İletişime Geç
               </a>
-              <a
+              <Link
                 href="/projeler"
                 className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors duration-200"
               >
                 Diğer Projeler
-              </a>
+              </Link>
             </div>
           </div>
         </Container>
       </Section>
+
+      {/* Alt Projeler (children) */}
+      {project.children && project.children.length > 0 && (
+        <Section background="white" padding="xl">
+          <Container>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                Alt Projeler
+              </h2>
+              <p className="text-xl text-gray-600">
+                Bu ana projenin kapsamında yer alan alt projeler
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {project.children
+                .map((childId) => mockProjects.find((p) => p.id === childId))
+                .filter(Boolean)
+                .map((child) => (
+                  <div
+                    key={child!.id}
+                    className="bg-white rounded-lg shadow-md p-6 flex flex-col"
+                  >
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
+                      {child!.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm line-clamp-2 mb-4">
+                      {child!.shortDescription}
+                    </p>
+                    <div className="mt-auto flex justify-end">
+                      <Link
+                        href={`/projeler/${child!.slug}`}
+                        className="inline-flex items-center border border-green-600 text-green-600 font-medium text-sm px-4 py-2 rounded-md hover:bg-green-50 transition-colors duration-200"
+                      >
+                        İncele
+                        <svg
+                          className="w-4 h-4 ml-2"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </Container>
+        </Section>
+      )}
     </div>
   );
 }

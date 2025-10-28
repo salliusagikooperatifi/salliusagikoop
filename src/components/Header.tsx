@@ -20,71 +20,71 @@ const Header = () => {
       submenu: [
         {
           name: "Özel Ağaçlandırma Projesi",
-          href: "/projeler/kategori/ozel-agaclandirma",
+          href: "/projeler/ozel-agaclandirma",
         },
         {
           name: "Hayvansal Üretim Projeleri",
-          href: "/projeler/kategori/hayvansal-uretim",
+          href: "/projeler/hayvansal-uretim",
           children: [
             {
               name: "Büyükbaş Süt",
-              href: "/projeler/kategori/hayvansal-uretim?alt=buyukbas-sut",
+              href: "/projeler/buyukbas-sut",
             },
             {
               name: "Büyükbaş Besi",
-              href: "/projeler/kategori/hayvansal-uretim?alt=buyukbas-besi",
+              href: "/projeler/buyukbas-besi",
             },
             {
               name: "Küçükbaş",
-              href: "/projeler/kategori/hayvansal-uretim?alt=kucukbas",
+              href: "/projeler/kucukbas",
             },
           ],
         },
         {
           name: "Bitkisel Üretim Projeleri",
-          href: "/projeler/kategori/bitkisel-uretim",
+          href: "/projeler/bitkisel-uretim",
           children: [
             {
               name: "Seracılık",
-              href: "/projeler/kategori/bitkisel-uretim?alt=seracilik",
+              href: "/projeler/seracilik",
             },
             {
               name: "Meyve Bahçesi",
-              href: "/projeler/kategori/bitkisel-uretim?alt=meyve-bahcesi",
+              href: "/projeler/meyve-bahcesi",
             },
           ],
         },
         {
           name: "Tarımsal Sanayi Projeleri",
-          href: "/projeler/kategori/tarimsal-sanayi",
+          href: "/projeler/tarimsal-sanayi",
           children: [
             {
               name: "Süt Toplama ve Soğutma Merkezi",
-              href: "/projeler/kategori/tarimsal-sanayi?alt=sut-toplama-ve-sogutma-merkezi",
+              href: "/projeler/sut-toplama-ve-sogutma-merkezi",
             },
             {
               name: "Zeytinyağı Üretim Tesisi",
-              href: "/projeler/kategori/tarimsal-sanayi?alt=zeytinyagi-uretim-tesisi",
+              href: "/projeler/zeytinyagi-uretim-tesisi",
             },
             {
               name: "Fıstık Çıtlatma ve Paketleme Tesisi",
-              href: "/projeler/kategori/tarimsal-sanayi?alt=fistik-citlatma-ve-paketleme-tesisi",
+              href: "/projeler/fistik-citlatma-ve-paketleme-tesisi",
             },
           ],
         },
         {
           name: "El Sanatları Halı-Kilim Üretim Projeleri",
-          href: "/projeler/kategori/el-sanatlari-hali-kilim",
+          href: "/projeler/el-sanatlari-hali-kilim",
           children: [
             {
               name: "El Sanatları Üretim Merkezi",
-              href: "/projeler/kategori/el-sanatlari-hali-kilim?alt=el-sanatlari-uretim-merkezi",
+              href: "/projeler/el-sanatlari-uretim-merkezi",
             },
           ],
         },
         {
           name: "Eğitim ve Spor Merkezi Projeleri",
-          href: "/projeler/kategori/egitim-spor-merkezi",
+          href: "/projeler/egitim-spor-merkezi",
         },
       ],
     },

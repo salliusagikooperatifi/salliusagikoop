@@ -12,18 +12,9 @@ export default function ProjectsPage() {
     { label: "Projelerimiz", href: "/projeler", isCurrent: true },
   ];
 
-  const mainCategoryOrder = [
-    "ozel-agaclandirma",
-    "hayvansal-uretim",
-    "bitkisel-uretim",
-    "tarimsal-sanayi",
-    "el-sanatlari-hali-kilim",
-    "egitim-spor-merkezi",
-  ] as const;
-
-  const mainProjects = mainCategoryOrder
-    .map((cat) => mockProjects.find((p) => p.category === cat))
-    .filter((p): p is Project => Boolean(p));
+  const mainProjects: Project[] = mockProjects.filter(
+    (p): p is Project => p.hierarchy === "main"
+  );
 
   return (
     <div className="min-h-screen">
