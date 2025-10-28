@@ -755,7 +755,7 @@ export const mockAnnouncements: Announcement[] = [
     published: true,
     createdAt: new Date("2024-01-20"),
     updatedAt: new Date("2024-01-20"),
-    isImportant: true,
+    isImportant: false,
     author: "Ahmet Yılmaz",
   },
   {

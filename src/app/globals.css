@@ -54,3 +54,20 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
 }
+
+/* Ken Burns Animation - Slow Version */
+@keyframes ken-burns-slow {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-ken-burns-slow {
+  animation: ken-burns-slow 20s ease-in-out infinite;
+}

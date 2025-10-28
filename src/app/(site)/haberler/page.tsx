@@ -1,13 +1,26 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import NewsCard from "@/components/cards/NewsCard";
 import { mockNews } from "@/lib/mockData";
-import { BreadcrumbItem } from "@/lib/types";
+import { BreadcrumbItem, NewsItem } from "@/lib/types";
 
 export default function NewsPage() {
+  const [loading, setLoading] = useState(true);
+  const [news, setNews] = useState<NewsItem[]>([]);
+
+  useEffect(() => {
+    // Simulate loading
+    const timer = setTimeout(() => {
+      setNews(mockNews);
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Anasayfa", href: "/" },
     { label: "Haberler", href: "/haberler", isCurrent: true },
@@ -41,35 +54,46 @@ export default function NewsPage() {
       {/* Haberler Listesi */}
       <Section background="gray" padding="xl">
         <Container>
-          {mockNews.length > 0 ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {mockNews.map((news) => (
-                <NewsCard key={news.id} news={news} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg
-                  className="w-12 h-12 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                  />
-                </svg>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            {loading ? (
+              <div className="flex justify-center items-center min-h-[400px]">
+                <div className="text-center">
+                  <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600 mb-4"></div>
+                  <p className="text-gray-600">Haberler yükleniyor...</p>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Haber bulunamadı
-              </h3>
-              <p className="text-gray-600">Henüz haber bulunmamaktadır.</p>
-            </div>
-          )}
+            ) : news.length === 0 ? (
+              <div className="text-center py-12 md:py-20">
+                <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg
+                    className="w-12 h-12 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  Haber bulunamadı
+                </h3>
+                <p className="text-gray-600 text-base md:text-lg">
+                  Henüz haber bulunmamaktadır.
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {news.map((newsItem) => (
+                  <NewsCard key={newsItem.id} news={newsItem} />
+                ))}
+              </div>
+            )}
+          </div>
         </Container>
       </Section>
 

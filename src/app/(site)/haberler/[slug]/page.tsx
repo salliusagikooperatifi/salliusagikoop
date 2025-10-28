@@ -1,3 +1,6 @@
+"use client";
+
+import React from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Container from "@/components/Container";
@@ -8,13 +11,34 @@ import { BreadcrumbItem } from "@/lib/types";
 import Link from "next/link";
 
 interface NewsDetailPageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }> | { slug: string };
 }
 
 export default function NewsDetailPage({ params }: NewsDetailPageProps) {
-  const news = mockNews.find((n) => n.slug === params.slug);
+  const [resolvedParams, setResolvedParams] = React.useState<{
+    slug: string;
+  } | null>(null);
+
+  React.useEffect(() => {
+    const resolveParams = async () => {
+      const resolved = params instanceof Promise ? await params : params;
+      setResolvedParams(resolved);
+    };
+    resolveParams();
+  }, [params]);
+
+  if (!resolvedParams) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600 mb-4"></div>
+          <p className="text-gray-600">Haber yükleniyor...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const news = mockNews.find((n) => n.slug === resolvedParams.slug);
 
   if (!news) {
     notFound();
@@ -58,17 +82,15 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
                 <span className="text-gray-500 text-sm">
                   {formatDate(news.publishedAt)}
                 </span>
-                <span className="text-gray-400 mx-2">•</span>
-                <span className="text-gray-500 text-sm">
-                  {news.views} görüntülenme
-                </span>
               </div>
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 {news.title}
               </h1>
-              <div className="flex items-center text-gray-600">
-                <span>Yazar: {news.author}</span>
-              </div>
+              {news.author && (
+                <div className="flex items-center text-gray-600">
+                  <span>Yazar: {news.author}</span>
+                </div>
+              )}
             </div>
           </div>
         </Container>

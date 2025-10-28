@@ -106,10 +106,10 @@ const Header = () => {
                 <span className="text-white font-bold text-lg">Ş</span>
               </div>
               <div className="ml-3">
-                <h1 className="text-xl font-bold text-gray-900">
-                  Şallıuşağı Kooperatifi
-                </h1>
-                <p className="text-sm text-gray-600">Üretim ve Pazarlama</p>
+                <h1 className="text-xl font-bold text-gray-900">Şallıuşağı</h1>
+                <p className="text-sm text-gray-600">
+                  Üretim ve Pazarlama Kooperatifi
+                </p>
               </div>
             </Link>
           </div>

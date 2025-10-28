@@ -44,8 +44,10 @@ const Footer = () => {
                 <span className="text-white font-bold text-lg">Ş</span>
               </div>
               <div className="ml-3">
-                <h3 className="text-lg font-bold">Şallıuşağı Kooperatifi</h3>
-                <p className="text-sm text-gray-400">Üretim ve Pazarlama</p>
+                <h3 className="text-lg font-bold">Şallıuşağı</h3>
+                <p className="text-sm text-gray-400">
+                  Üretim ve Pazarlama Kooperatifi
+                </p>
               </div>
             </div>
             <p className="text-gray-400 text-sm mb-4">
