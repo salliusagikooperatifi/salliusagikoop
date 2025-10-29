@@ -26,7 +26,9 @@ export default function AdminBoardPage() {
   }
 
   useEffect(() => {
-    load();
+    (async () => {
+      await load();
+    })();
   }, []);
 
   async function handleAdd(e: React.FormEvent) {

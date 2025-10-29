@@ -1,44 +1,77 @@
 import Link from "next/link";
-import Image from "next/image";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import ProjectCard from "@/components/cards/ProjectCard";
 import NewsCard from "@/components/cards/NewsCard";
-import { mockProjects, mockNews, mockAnnouncements } from "@/lib/mockData";
+import { mockProjects } from "@/lib/mockData";
+import { getSupabaseServer } from "@/lib/supabase/server";
+import { Announcement, NewsItem } from "@/lib/types";
+export const dynamic = "force-dynamic";
+import RotatingText from "@/components/RotatingText";
 
-export default function HomePage() {
-  const featuredProjects = mockProjects
-    .filter((project) => project.status === "active")
-    .slice(0, 3);
-  const featuredNews = mockNews.filter((news) => news.isFeatured).slice(0, 1);
-  const recentNews = mockNews.filter((news) => !news.isFeatured).slice(0, 3);
-  const importantAnnouncements = mockAnnouncements
-    .filter((announcement) => announcement.isImportant)
-    .slice(0, 3);
+async function fetchLatestNews(): Promise<NewsItem[]> {
+  try {
+    const supabase = getSupabaseServer();
+    const { data, error } = await supabase
+      .from("news")
+      .select("*")
+      .order("publishedAt", { ascending: false })
+      .limit(4);
+
+    if (error) {
+      console.error("Haberler yüklenirken hata:", error);
+      return [];
+    }
+
+    return (data as NewsItem[]) || [];
+  } catch (err) {
+    console.error("Haberler yüklenirken genel hata:", err);
+    return [];
+  }
+}
+
+export default async function HomePage() {
+  const featuredProjects = mockProjects.filter(
+    (project) => project.hierarchy === "main"
+  );
+
+  const latestNews = await fetchLatestNews();
+
+  // Fetch important announcements from Supabase
+  const supabase = getSupabaseServer();
+  const { data: importantData } = await supabase
+    .from("announcements")
+    .select("*")
+    .eq("isImportant", true)
+    .order("date", { ascending: false })
+    .limit(3);
+  const importantAnnouncements = (importantData as Announcement[]) || [];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <Section
-        background="green"
-        padding="xl"
-        className="relative overflow-hidden"
+      <section
+        className="
+    relative h-screen flex items-center justify-center overflow-hidden
+    after:content-[''] after:absolute after:inset-0 after:bg-black/60
+  "
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-blue-600 opacity-90"></div>
+        {/* Background Image with Ken Burns Effect */}
+        <div className="absolute inset-0 bg-[url('/images/hero/hero.avif')] bg-cover bg-center animate-ken-burns-slow"></div>
         <Container className="relative z-10">
           <div className="text-center text-white">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Şallıuşağı Üretim ve Pazarlama Kooperatifi
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-              Bölgemizde sürdürülebilir tarım ve üretim faaliyetlerini
-              destekleyerek, üyelerimizin refahını artırmayı ve toplumsal
-              kalkınmaya katkıda bulunmayı hedefliyoruz.
-            </p>
+
+            {/* Rotating text */}
+            <div className="h-24 md:h-28 flex items-center justify-center mb-8">
+              <RotatingText />
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/projeler"
-                className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200"
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors duration-200"
               >
                 Projelerimizi Keşfedin
               </Link>
@@ -51,50 +84,18 @@ export default function HomePage() {
             </div>
           </div>
         </Container>
-      </Section>
-
-      {/* İstatistikler */}
-      <Section background="white" padding="lg">
-        <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-green-600 mb-2">
-                6
-              </div>
-              <div className="text-gray-600">Aktif Proje</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">
-                50+
-              </div>
-              <div className="text-gray-600">Kooperatif Üyesi</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-yellow-600 mb-2">
-                15M+
-              </div>
-              <div className="text-gray-600">TL Yatırım</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-purple-600 mb-2">
-                5
-              </div>
-              <div className="text-gray-600">Yıllık Deneyim</div>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      </section>
 
       {/* Öne Çıkan Projeler */}
       <Section background="gray" padding="xl">
         <Container>
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Öne Çıkan Projelerimiz
+              Projelerimiz
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Sürdürülebilir kalkınma hedeflerimiz doğrultusunda hayata
-              geçirdiğimiz önemli projelerimizi keşfedin.
+              geçirdiğimiz ana projelerimizi keşfedin
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -107,7 +108,7 @@ export default function HomePage() {
               href="/projeler"
               className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors duration-200"
             >
-              Tüm Projeleri Görüntüle
+              Tüm Projeleri İncele
               <svg
                 className="w-5 h-5 ml-2"
                 fill="none"
@@ -202,50 +203,140 @@ export default function HomePage() {
               Kooperatifimizden önemli duyurular ve güncellemeler
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {importantAnnouncements.map((announcement) => (
-              <div
-                key={announcement.id}
-                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
-              >
-                <div className="flex items-start mb-4">
-                  <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                    <svg
-                      className="w-4 h-4 text-red-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
-                      />
-                    </svg>
+          <div className="max-w-4xl mx-auto">
+            {importantAnnouncements.length > 0 ? (
+              <div className="space-y-6">
+                {importantAnnouncements.map((announcement) => (
+                  <div
+                    key={announcement.id}
+                    className={`group rounded-xl border-l-4 bg-white/80 backdrop-blur-sm shadow-sm transition-all duration-300 hover:-translate-x-1 hover:shadow-xl ${
+                      announcement.isImportant
+                        ? "border-red-300"
+                        : "border-green-300"
+                    }`}
+                  >
+                    <div className="p-6">
+                      <div className="flex items-start gap-4">
+                        <div
+                          className={`flex size-12 shrink-0 items-center justify-center rounded-xl shadow-sm ring-1 ring-black/5 transition-all duration-300 group-hover:scale-110 ${
+                            announcement.isImportant
+                              ? "bg-white-100"
+                              : "bg-white-100"
+                          }`}
+                        >
+                          <svg
+                            className={`size-6 ${
+                              announcement.isImportant
+                                ? "text-red-300"
+                                : "text-green-300"
+                            }`}
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                            />
+                          </svg>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-start justify-between mb-2">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                              {announcement.title}
+                            </h3>
+                            {announcement.isImportant && (
+                              <span className="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full shrink-0">
+                                Önemli
+                              </span>
+                            )}
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2 text-sm text-gray-500">
+                              <span>
+                                {new Date(announcement.date).toLocaleDateString(
+                                  "tr-TR",
+                                  {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                  }
+                                )}
+                              </span>
+                            </div>
+                            <Link
+                              href="/duyurular"
+                              className="inline-flex items-center text-green-600 text-sm font-medium hover:text-green-700 hover:underline transition-colors duration-200"
+                            >
+                              Duyurulara Git
+                              <svg
+                                className="w-4 h-4 ml-1"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M9 5l7 7-7 7"
+                                />
+                              </svg>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
-                      {announcement.title}
-                    </h3>
-                    <p className="text-sm text-gray-500">
-                      {new Date(announcement.publishedAt).toLocaleDateString(
-                        "tr-TR"
-                      )}
-                    </p>
-                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg
+                    className="w-12 h-12 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
                 </div>
-                <p className="text-gray-600 text-sm line-clamp-3 mb-4">
-                  {announcement.excerpt}
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  Şu anda önemli duyuru bulunmamaktadır
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  Tüm duyurularımızı görmek için aşağıdaki butona
+                  tıklayabilirsiniz.
                 </p>
                 <Link
-                  href={`/duyurular/${announcement.slug}`}
-                  className="text-green-600 hover:text-green-700 text-sm font-medium"
+                  href="/duyurular"
+                  className="inline-flex items-center bg-green-600 text-white font-medium px-6 py-3 rounded-lg hover:bg-green-700 transition-colors duration-200"
                 >
-                  Devamını Oku →
+                  Tüm Duyuruları Görüntüle
+                  <svg
+                    className="w-5 h-5 ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
                 </Link>
               </div>
-            ))}
+            )}
           </div>
         </Container>
       </Section>
@@ -262,41 +353,83 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Öne Çıkan Haber */}
-          {featuredNews.length > 0 && (
-            <div className="mb-12">
-              <NewsCard news={featuredNews[0]} variant="featured" />
+          {latestNews.length > 0 ? (
+            <>
+              {/* Son 4 Haber - 2X2 Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {latestNews.map((news) => (
+                  <NewsCard key={news.id} news={news} />
+                ))}
+              </div>
+
+              <div className="text-center mt-12">
+                <Link
+                  href="/haberler"
+                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                >
+                  Tüm Haberleri Görüntüle
+                  <svg
+                    className="w-5 h-5 ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </Link>
+              </div>
+            </>
+          ) : (
+            <div className="text-center py-16">
+              <div className="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg
+                  className="w-12 h-12 text-blue-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+                Henüz haber bulunmamaktadır
+              </h3>
+              <p className="text-gray-600 mb-8 max-w-md mx-auto">
+                Kooperatifimizden güncel haberleri ve gelişmeleri yakında
+                paylaşacağız. Tüm haberlerimizi görmek için aşağıdaki butona
+                tıklayabilirsiniz.
+              </p>
+              <Link
+                href="/haberler"
+                className="inline-flex items-center bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md hover:shadow-lg"
+              >
+                Tüm Haberleri Görüntüle
+                <svg
+                  className="w-5 h-5 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </Link>
             </div>
           )}
-
-          {/* Diğer Haberler */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {recentNews.map((news) => (
-              <NewsCard key={news.id} news={news} />
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link
-              href="/haberler"
-              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200"
-            >
-              Tüm Haberleri Görüntüle
-              <svg
-                className="w-5 h-5 ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </Link>
-          </div>
         </Container>
       </Section>
 
@@ -312,12 +445,6 @@ export default function HomePage() {
               kalkınmaya katkıda bulunun ve üretim faaliyetlerinizi geliştirin.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/uyelerimiz"
-                className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200"
-              >
-                Üye Ol
-              </Link>
               <Link
                 href="/iletisim"
                 className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors duration-200"

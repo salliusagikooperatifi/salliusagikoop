@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import SupabaseRealtimeRefresher from "@/components/SupabaseRealtimeRefresher";
 import { getSupabaseServer } from "@/lib/supabase/server";
 import { BreadcrumbItem, Announcement } from "@/lib/types";
+import { Megaphone } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 async function fetchAnnouncements(): Promise<Announcement[]> {
@@ -71,7 +72,7 @@ export default async function AnnouncementsPage() {
       </Section>
 
       {/* Duyurular Listesi */}
-      <section className="py-12 md:py-16 lg:py-20 bg-linear-to-b from-white via-slate-50 to-white">
+      <section className="py-6 md:py-16 lg:py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {announcements.length === 0 ? (
             <div className="text-center py-12 md:py-20">
@@ -98,39 +99,11 @@ export default async function AnnouncementsPage() {
             <div className="space-y-6">
               {announcements.map((announcement) => (
                 <div key={announcement.id}>
-                  <div
-                    className={`group rounded-xl border-l-4 bg-white/80 backdrop-blur-sm shadow-sm transition-all duration-300 hover:-translate-x-1 hover:shadow-xl ${
-                      announcement.isImportant
-                        ? "border-red-300"
-                        : "border-green-300"
-                    }`}
-                  >
+                  <div className="group rounded-xl border border-blue-700 bg-white shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-blue-800">
                     <div className="p-6">
                       <div className="flex items-start gap-4">
-                        <div
-                          className={`flex size-12 shrink-0 items-center justify-center rounded-xl shadow-sm ring-1 ring-black/5 transition-all duration-300 group-hover:scale-110 ${
-                            announcement.isImportant
-                              ? "bg-white-100"
-                              : "bg-white-100"
-                          }`}
-                        >
-                          <svg
-                            className={`size-6 ${
-                              announcement.isImportant
-                                ? "text-red-600"
-                                : "text-green-600"
-                            }`}
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
-                            />
-                          </svg>
+                        <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 transition-all duration-300 group-hover:scale-110">
+                          <Megaphone className="size-6 text-blue-600" />
                         </div>
                         <div className="flex-1">
                           <div className="flex items-start justify-between mb-2">
@@ -156,7 +129,7 @@ export default async function AnnouncementsPage() {
                       </div>
                       <div className="ml-16">
                         <div
-                          className="text-gray-700 leading-relaxed [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:my-1"
+                          className="prose prose-sm max-w-none text-gray-700 leading-relaxed"
                           dangerouslySetInnerHTML={{
                             __html: announcement.content || "",
                           }}

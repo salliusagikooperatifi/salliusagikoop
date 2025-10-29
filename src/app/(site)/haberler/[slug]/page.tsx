@@ -1,45 +1,41 @@
-"use client";
-
-import React from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { mockNews } from "@/lib/mockData";
-import { BreadcrumbItem } from "@/lib/types";
+import { BreadcrumbItem, NewsItem } from "@/lib/types";
 import Link from "next/link";
+import { getSupabaseServer } from "@/lib/supabase/server";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 interface NewsDetailPageProps {
-  params: Promise<{ slug: string }> | { slug: string };
+  params: Promise<{ slug: string }>; // Promise-based params
 }
 
-export default function NewsDetailPage({ params }: NewsDetailPageProps) {
-  const [resolvedParams, setResolvedParams] = React.useState<{
-    slug: string;
-  } | null>(null);
-
-  React.useEffect(() => {
-    const resolveParams = async () => {
-      const resolved = params instanceof Promise ? await params : params;
-      setResolvedParams(resolved);
-    };
-    resolveParams();
-  }, [params]);
-
-  if (!resolvedParams) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600 mb-4"></div>
-          <p className="text-gray-600">Haber yükleniyor...</p>
-        </div>
-      </div>
-    );
+async function fetchNewsBySlug(slug: string): Promise<NewsItem | null> {
+  try {
+    const supabase = getSupabaseServer();
+    const { data, error } = await supabase
+      .from("news")
+      .select("*")
+      .eq("slug", slug)
+      .maybeSingle();
+    if (error) {
+      console.error("Haber yüklenirken hata:", error);
+      return null;
+    }
+    return (data as unknown as NewsItem) || null;
+  } catch (err) {
+    console.error("Haber yüklenirken genel hata:", err);
+    return null;
   }
+}
 
-  const news = mockNews.find((n) => n.slug === resolvedParams.slug);
-
+export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
+  const { slug } = await params;
+  const news = await fetchNewsBySlug(slug);
   if (!news) {
     notFound();
   }
@@ -61,27 +57,27 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
 
   return (
     <div className="min-h-screen">
-      {/* Breadcrumbs */}
       <Section background="gray" padding="sm">
         <Container>
           <Breadcrumbs items={breadcrumbItems} />
         </Container>
       </Section>
 
-      {/* Hero Section */}
-      <Section background="white" padding="lg">
+      <Section background="white" padding="md">
         <Container>
           <div className="max-w-4xl mx-auto">
-            <div className="mb-6">
+            <div className="mb-3">
               <div className="flex items-center mb-4">
                 {news.isFeatured && (
                   <span className="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full mr-4">
                     Öne Çıkan
                   </span>
                 )}
-                <span className="text-gray-500 text-sm">
-                  {formatDate(news.publishedAt)}
-                </span>
+                {news.publishedAt && (
+                  <span className="text-gray-500 text-sm">
+                    {formatDate(news.publishedAt)}
+                  </span>
+                )}
               </div>
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 {news.title}
@@ -96,9 +92,8 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
         </Container>
       </Section>
 
-      {/* Featured Image */}
       {news.featuredImage && (
-        <Section background="white" padding="lg">
+        <div>
           <Container>
             <div className="max-w-4xl mx-auto">
               <div className="relative h-96 w-full rounded-lg overflow-hidden">
@@ -111,34 +106,34 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
               </div>
             </div>
           </Container>
-        </Section>
+        </div>
       )}
 
-      {/* İçerik */}
-      <Section background="white" padding="xl">
+      <Section background="white" padding="md">
         <Container>
           <div className="max-w-4xl mx-auto">
-            <div className="prose prose-lg max-w-none">
+            {news.excerpt && (
               <div className="bg-gray-50 p-6 rounded-lg mb-8">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   Özet
                 </h3>
-                <p className="text-gray-700">{news.excerpt}</p>
+                <div
+                  className="prose prose-sm max-w-none"
+                  dangerouslySetInnerHTML={{ __html: news.excerpt }}
+                />
               </div>
+            )}
 
-              <div className="text-gray-800 leading-relaxed">
-                {news.content.split("\n").map((paragraph, index) => (
-                  <p key={index} className="mb-4">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            </div>
+            {news.content && (
+              <div
+                className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-800 prose-a:text-blue-600 prose-strong:text-gray-900 prose-ul:text-gray-800 prose-ol:text-gray-800 prose-li:text-gray-800"
+                dangerouslySetInnerHTML={{ __html: news.content }}
+              />
+            )}
           </div>
         </Container>
       </Section>
 
-      {/* Tags */}
       {news.tags && news.tags.length > 0 && (
         <Section background="gray" padding="lg">
           <Container>
@@ -161,7 +156,6 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
         </Section>
       )}
 
-      {/* Gallery */}
       {news.images && news.images.length > 0 && (
         <Section background="white" padding="xl">
           <Container>
@@ -219,14 +213,14 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
                   )}&text=${encodeURIComponent(news.title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center px-4 py-2 bg-blue-400 text-white rounded-lg hover:bg-blue-500 transition-colors duration-200"
+                  className="flex items-center px-4 py-2 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition-colors duration-200"
                 >
                   <svg
                     className="w-5 h-5 mr-2"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
                   Twitter
                 </a>
@@ -257,7 +251,6 @@ export default function NewsDetailPage({ params }: NewsDetailPageProps) {
         </Container>
       </Section>
 
-      {/* Navigasyon */}
       <Section background="white" padding="lg">
         <Container>
           <div className="max-w-4xl mx-auto">

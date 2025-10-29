@@ -8,7 +8,6 @@ import Toast, { ToastType } from "@/components/Toast";
 export default function AdminMembersPage() {
   const [members, setMembers] = useState<Member[]>([]);
   const [fullName, setFullName] = useState("");
-  const [position, setPosition] = useState("");
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState<{
     message: string;
@@ -29,7 +28,7 @@ export default function AdminMembersPage() {
       } else {
         console.log("Veriler yüklendi:", data);
         // fullName yoksa name + surname'den oluştur
-        const membersWithFullName = (data || []).map((member: any) => ({
+        const membersWithFullName = (data || []).map((member: Member) => ({
           ...member,
           fullName:
             member.fullName ||
@@ -44,7 +43,9 @@ export default function AdminMembersPage() {
   }
 
   useEffect(() => {
-    load();
+    (async () => {
+      await load();
+    })();
   }, []);
 
   async function handleAdd(e: React.FormEvent) {
@@ -55,7 +56,7 @@ export default function AdminMembersPage() {
     }
 
     setLoading(true);
-    console.log("Ekleme işlemi başladı:", { fullName, position });
+    console.log("Ekleme işlemi başladı:", { fullName });
 
     try {
       // fullName'i name ve surname'e ayır
@@ -66,7 +67,6 @@ export default function AdminMembersPage() {
       const { data, error } = await supabase.from("members").insert({
         name,
         surname,
-        position,
       });
 
       if (error) {
@@ -75,7 +75,6 @@ export default function AdminMembersPage() {
       } else {
         console.log("Başarıyla eklendi:", data);
         setFullName("");
-        setPosition("");
         await load();
         setToast({ message: "Üye eklendi.", type: "success" });
       }
@@ -124,19 +123,6 @@ export default function AdminMembersPage() {
             flex: 1,
           }}
         />
-        <input
-          placeholder="Görev/Ünvan"
-          value={position}
-          onChange={(e) => setPosition(e.target.value)}
-          style={{
-            padding: 12,
-            borderRadius: 10,
-            border: "1px solid #e5e7eb",
-            background: "#ffffff",
-            boxShadow: "0 1px 2px rgba(0,0,0,0.04)",
-            width: 260,
-          }}
-        />
         <button
           disabled={loading || !fullName.trim()}
           style={{
@@ -171,9 +157,6 @@ export default function AdminMembersPage() {
             >
               <div>
                 <div style={{ fontWeight: 700 }}>{m.fullName}</div>
-                <div style={{ color: "#6b7280", fontSize: 14 }}>
-                  {m.position}
-                </div>
               </div>
               <button
                 onClick={() => handleDelete(m.id)}

@@ -201,24 +201,43 @@ export default function RichTextEditor({
             // Remove class attributes
             if (el.hasAttribute("class")) el.removeAttribute("class");
 
-            // Normalize styles
+            // Normalize styles - preserve text colors and background colors
             if (tag === "P") {
               const textAlign = (el as HTMLElement).style.textAlign;
               el.removeAttribute("style");
               if (textAlign) (el as HTMLElement).style.textAlign = textAlign;
             } else if (tag === "LI") {
+              const textAlign = (el as HTMLElement).style.textAlign;
               el.removeAttribute("style");
               el.removeAttribute("value");
+              if (textAlign) (el as HTMLElement).style.textAlign = textAlign;
             } else if (tag === "SPAN") {
-              // Unwrap spans entirely
-              unwrapNode(el);
-              return;
+              // Keep SPAN if it has color or background-color
+              const color = (el as HTMLElement).style.color;
+              const bgColor = (el as HTMLElement).style.backgroundColor;
+              if (color || (bgColor && bgColor !== "transparent" && bgColor !== "rgba(0, 0, 0, 0)")) {
+                // Keep the color styles, remove others
+                const savedColor = color;
+                const savedBgColor = bgColor;
+                el.removeAttribute("style");
+                if (savedColor) (el as HTMLElement).style.color = savedColor;
+                if (savedBgColor && savedBgColor !== "transparent" && savedBgColor !== "rgba(0, 0, 0, 0)") {
+                  (el as HTMLElement).style.backgroundColor = savedBgColor;
+                }
+              } else {
+                // Unwrap empty or non-styled spans
+                unwrapNode(el);
+                return;
+              }
             } else {
+              // For other tags, don't remove all styles, just normalize
+              const textAlign = (el as HTMLElement).style.textAlign;
               el.removeAttribute("style");
+              if (textAlign) (el as HTMLElement).style.textAlign = textAlign;
             }
 
             // Remove empty formatting wrappers
-            if (["STRONG", "B", "I", "U", "SPAN"].includes(tag)) {
+            if (["STRONG", "B", "I", "U"].includes(tag)) {
               if ((el.textContent || "").trim() === "") {
                 unwrapNode(el);
                 return;
