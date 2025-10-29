@@ -1,17 +1,44 @@
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { mockBoardMembers, mockAuditMembers } from "@/lib/mockData";
-import { BreadcrumbItem } from "@/lib/types";
+import SupabaseRealtimeRefresher from "@/components/SupabaseRealtimeRefresher";
+import { getSupabaseServer } from "@/lib/supabase/server";
+import { BreadcrumbItem, BoardMember } from "@/lib/types";
+export const dynamic = "force-dynamic";
 
-export default function ManagementPage() {
+async function fetchBoardMembers(): Promise<BoardMember[]> {
+  try {
+    const supabase = getSupabaseServer();
+    const { data, error } = await supabase
+      .from("board_members")
+      .select("*")
+      .order("fullName");
+
+    if (error) {
+      console.error("Yönetim kurulu yüklenirken hata:", error);
+      return [];
+    }
+
+    return (data as unknown as BoardMember[]) ?? [];
+  } catch (err) {
+    console.error("Yönetim kurulu yüklenirken genel hata:", err);
+    return [];
+  }
+}
+
+export default async function ManagementPage() {
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Anasayfa", href: "/" },
     { label: "Yönetim", href: "/yonetim", isCurrent: true },
   ];
 
+  const allMembers = await fetchBoardMembers();
+  const boardMembers = allMembers.filter((m) => m.role === "board");
+  const auditMembers = allMembers.filter((m) => m.role === "audit");
+
   return (
     <div className="min-h-screen">
+      <SupabaseRealtimeRefresher tables={["board_members"]} />
       {/* Breadcrumbs */}
       <Section background="gray" padding="sm">
         <Container>
@@ -62,7 +89,7 @@ export default function ManagementPage() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {mockBoardMembers.map((member) => (
+                {boardMembers.map((member) => (
                   <tr key={member.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       {member.fullName}
@@ -104,7 +131,7 @@ export default function ManagementPage() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {mockAuditMembers.map((member) => (
+                {auditMembers.map((member) => (
                   <tr key={member.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       {member.fullName}

@@ -1,33 +1,43 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import NewsCard from "@/components/cards/NewsCard";
-import { mockNews } from "@/lib/mockData";
+import SupabaseRealtimeRefresher from "@/components/SupabaseRealtimeRefresher";
+import { getSupabaseServer } from "@/lib/supabase/server";
 import { BreadcrumbItem, NewsItem } from "@/lib/types";
+export const dynamic = "force-dynamic";
 
-export default function NewsPage() {
-  const [loading, setLoading] = useState(true);
-  const [news, setNews] = useState<NewsItem[]>([]);
+async function fetchNews(): Promise<NewsItem[]> {
+  try {
+    const supabase = getSupabaseServer();
+    const { data, error } = await supabase
+      .from("news")
+      .select("*")
+      .order("publishedAt", { ascending: false });
 
-  useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setNews(mockNews);
-      setLoading(false);
-    }, 1000);
+    if (error) {
+      console.error("Haberler yüklenirken hata:", error);
+      return [];
+    }
 
-    return () => clearTimeout(timer);
-  }, []);
+    return (data as NewsItem[]) || [];
+  } catch (err) {
+    console.error("Haberler yüklenirken genel hata:", err);
+    return [];
+  }
+}
+
+export default async function NewsPage() {
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Anasayfa", href: "/" },
     { label: "Haberler", href: "/haberler", isCurrent: true },
   ];
 
+  const news = await fetchNews();
+
   return (
     <div className="min-h-screen">
+      <SupabaseRealtimeRefresher tables={["news"]} />
       {/* Breadcrumbs */}
       <Section background="gray" padding="sm">
         <Container>
@@ -55,14 +65,7 @@ export default function NewsPage() {
       <Section background="gray" padding="xl">
         <Container>
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            {loading ? (
-              <div className="flex justify-center items-center min-h-[400px]">
-                <div className="text-center">
-                  <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600 mb-4"></div>
-                  <p className="text-gray-600">Haberler yükleniyor...</p>
-                </div>
-              </div>
-            ) : news.length === 0 ? (
+            {news.length === 0 ? (
               <div className="text-center py-12 md:py-20">
                 <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
                   <svg

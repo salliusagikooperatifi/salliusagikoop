@@ -1,31 +1,38 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { mockAnnouncements } from "@/lib/mockData";
+import SupabaseRealtimeRefresher from "@/components/SupabaseRealtimeRefresher";
+import { getSupabaseServer } from "@/lib/supabase/server";
 import { BreadcrumbItem, Announcement } from "@/lib/types";
-import { motion } from "framer-motion";
+export const dynamic = "force-dynamic";
 
-export default function AnnouncementsPage() {
-  const [loading, setLoading] = useState(true);
-  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+async function fetchAnnouncements(): Promise<Announcement[]> {
+  try {
+    const supabase = getSupabaseServer();
+    const { data, error } = await supabase
+      .from("announcements")
+      .select("*")
+      .order("date", { ascending: false });
 
+    if (error) {
+      console.error("Duyurular yüklenirken hata:", error);
+      return [];
+    }
+
+    return (data as Announcement[]) || [];
+  } catch (err) {
+    console.error("Duyurular yüklenirken genel hata:", err);
+    return [];
+  }
+}
+
+export default async function AnnouncementsPage() {
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Anasayfa", href: "/" },
     { label: "Duyurular", href: "/duyurular", isCurrent: true },
   ];
 
-  useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setAnnouncements(mockAnnouncements);
-      setLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const announcements = await fetchAnnouncements();
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("tr-TR", {
@@ -35,23 +42,11 @@ export default function AnnouncementsPage() {
     });
   };
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
-  };
+  // animations removed for server component compatibility
 
   return (
     <div className="min-h-screen">
+      <SupabaseRealtimeRefresher tables={["announcements"]} />
       {/* Breadcrumbs */}
       <Section background="gray" padding="sm">
         <Container>
@@ -78,14 +73,7 @@ export default function AnnouncementsPage() {
       {/* Duyurular Listesi */}
       <section className="py-12 md:py-16 lg:py-20 bg-linear-to-b from-white via-slate-50 to-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {loading ? (
-            <div className="flex justify-center items-center min-h-[400px]">
-              <div className="text-center">
-                <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-600 mb-4"></div>
-                <p className="text-gray-600">Duyurular yükleniyor...</p>
-              </div>
-            </div>
-          ) : announcements.length === 0 ? (
+          {announcements.length === 0 ? (
             <div className="text-center py-12 md:py-20">
               <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg
@@ -107,19 +95,14 @@ export default function AnnouncementsPage() {
               </p>
             </div>
           ) : (
-            <motion.div
-              variants={container}
-              initial="hidden"
-              animate="show"
-              className="space-y-6"
-            >
+            <div className="space-y-6">
               {announcements.map((announcement) => (
-                <motion.div key={announcement.id} variants={item}>
+                <div key={announcement.id}>
                   <div
                     className={`group rounded-xl border-l-4 bg-white/80 backdrop-blur-sm shadow-sm transition-all duration-300 hover:-translate-x-1 hover:shadow-xl ${
                       announcement.isImportant
-                        ? "border-red-500"
-                        : "border-green-500"
+                        ? "border-red-300"
+                        : "border-green-300"
                     }`}
                   >
                     <div className="p-6">
@@ -127,8 +110,8 @@ export default function AnnouncementsPage() {
                         <div
                           className={`flex size-12 shrink-0 items-center justify-center rounded-xl shadow-sm ring-1 ring-black/5 transition-all duration-300 group-hover:scale-110 ${
                             announcement.isImportant
-                              ? "bg-red-100"
-                              : "bg-green-100"
+                              ? "bg-white-100"
+                              : "bg-white-100"
                           }`}
                         >
                           <svg
@@ -162,19 +145,28 @@ export default function AnnouncementsPage() {
                           </div>
                           <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
                             <span>{formatDate(announcement.date)}</span>
+                            {announcement.author && (
+                              <>
+                                <span>·</span>
+                                <span>{announcement.author}</span>
+                              </>
+                            )}
                           </div>
                         </div>
                       </div>
                       <div className="ml-16">
-                        <div className="text-gray-700 leading-relaxed whitespace-pre-line">
-                          {announcement.content}
-                        </div>
+                        <div
+                          className="text-gray-700 leading-relaxed [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:my-1"
+                          dangerouslySetInnerHTML={{
+                            __html: announcement.content || "",
+                          }}
+                        />
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           )}
         </div>
       </section>

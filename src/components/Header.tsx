@@ -106,7 +106,9 @@ const Header = () => {
                 <span className="text-white font-bold text-lg">Ş</span>
               </div>
               <div className="ml-3">
-                <h1 className="text-xl font-bold text-gray-900">Şallıuşağı</h1>
+                <h1 className="text-xl font-bold text-gray-900">
+                  Ş a l l ı u ş a ğ ı
+                </h1>
                 <p className="text-sm text-gray-600">
                   Üretim ve Pazarlama Kooperatifi
                 </p>
@@ -278,7 +280,7 @@ const Header = () => {
                                 <Link
                                   key={child.name}
                                   href={child.href}
-                                  className={`block px-3 py-1 text-sm font-bold rounded transition-colors duration-200 ${
+                                  className={`block px-3 py-1 text-sm rounded transition-colors duration-200 ${
                                     pathname === child.href
                                       ? "text-green-600 bg-green-50"
                                       : "text-gray-700 hover:bg-green-50 hover:text-green-700"

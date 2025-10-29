@@ -3,18 +3,28 @@ import Container from "@/components/Container";
 import Section from "@/components/Section";
 import ProjectCard from "@/components/cards/ProjectCard";
 import NewsCard from "@/components/cards/NewsCard";
-import { mockProjects, mockNews, mockAnnouncements } from "@/lib/mockData";
+import { mockProjects, mockNews } from "@/lib/mockData";
+import { getSupabaseServer } from "@/lib/supabase/server";
+import { Announcement } from "@/lib/types";
+export const dynamic = "force-dynamic";
 import RotatingText from "@/components/RotatingText";
 
-export default function HomePage() {
+export default async function HomePage() {
   const featuredProjects = mockProjects.filter(
     (project) => project.hierarchy === "main"
   );
   const featuredNews = mockNews.filter((news) => news.isFeatured).slice(0, 1);
   const recentNews = mockNews.filter((news) => !news.isFeatured).slice(0, 3);
-  const importantAnnouncements = mockAnnouncements
-    .filter((announcement) => announcement.isImportant)
-    .slice(0, 3);
+
+  // Fetch important announcements from Supabase
+  const supabase = getSupabaseServer();
+  const { data: importantData } = await supabase
+    .from("announcements")
+    .select("*")
+    .eq("isImportant", true)
+    .order("date", { ascending: false })
+    .limit(3);
+  const importantAnnouncements = (importantData as Announcement[]) || [];
 
   return (
     <div className="min-h-screen">
@@ -180,8 +190,8 @@ export default function HomePage() {
                     key={announcement.id}
                     className={`group rounded-xl border-l-4 bg-white/80 backdrop-blur-sm shadow-sm transition-all duration-300 hover:-translate-x-1 hover:shadow-xl ${
                       announcement.isImportant
-                        ? "border-red-500"
-                        : "border-green-500"
+                        ? "border-red-300"
+                        : "border-green-300"
                     }`}
                   >
                     <div className="p-6">
@@ -189,15 +199,15 @@ export default function HomePage() {
                         <div
                           className={`flex size-12 shrink-0 items-center justify-center rounded-xl shadow-sm ring-1 ring-black/5 transition-all duration-300 group-hover:scale-110 ${
                             announcement.isImportant
-                              ? "bg-red-100"
-                              : "bg-green-100"
+                              ? "bg-white-100"
+                              : "bg-white-100"
                           }`}
                         >
                           <svg
                             className={`size-6 ${
                               announcement.isImportant
-                                ? "text-red-600"
-                                : "text-green-600"
+                                ? "text-red-300"
+                                : "text-green-300"
                             }`}
                             fill="none"
                             stroke="currentColor"

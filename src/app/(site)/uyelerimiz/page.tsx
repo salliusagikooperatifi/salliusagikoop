@@ -1,23 +1,54 @@
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import MemberCard from "@/components/cards/MemberCard";
-import { mockMembers } from "@/lib/mockData";
-import { BreadcrumbItem } from "@/lib/types";
+import SupabaseRealtimeRefresher from "@/components/SupabaseRealtimeRefresher";
+import { getSupabaseServer } from "@/lib/supabase/server";
+import { BreadcrumbItem, Member } from "@/lib/types";
+export const dynamic = "force-dynamic";
 
-export default function MembersPage() {
+async function fetchMembers(): Promise<Member[]> {
+  try {
+    const supabase = getSupabaseServer();
+    const { data, error } = await supabase
+      .from("members")
+      .select("*")
+      .order("name");
+
+    if (error) {
+      console.error("Üyeler yüklenirken hata:", error);
+      return [];
+    }
+
+    // fullName yoksa name + surname'den oluştur
+    const membersWithFullName = (data || []).map(
+      (member: Record<string, unknown>) => ({
+        ...member,
+        fullName:
+          member.fullName ||
+          `${member.name || ""} ${member.surname || ""}`.trim(),
+        role: member.role || "member",
+        isActive: member.isActive !== false,
+      })
+    );
+
+    return membersWithFullName as Member[];
+  } catch (err) {
+    console.error("Üyeler yüklenirken genel hata:", err);
+    return [];
+  }
+}
+
+export default async function MembersPage() {
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Anasayfa", href: "/" },
     { label: "Üyelerimiz", href: "/uyelerimiz", isCurrent: true },
   ];
 
-  const boardMembers = mockMembers.filter((member) => member.role === "board");
-  const regularMembers = mockMembers.filter(
-    (member) => member.role === "member"
-  );
+  const members = await fetchMembers();
 
   return (
     <div className="min-h-screen">
+      <SupabaseRealtimeRefresher tables={["members"]} />
       {/* Breadcrumbs */}
       <Section background="gray" padding="sm">
         <Container>
@@ -95,7 +126,7 @@ export default function MembersPage() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {mockMembers.map((member) => (
+                {members.map((member) => (
                   <tr key={member.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-center text-sm font-medium text-gray-900">
                       {member.fullName}
