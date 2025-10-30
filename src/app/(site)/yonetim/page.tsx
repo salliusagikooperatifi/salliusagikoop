@@ -16,17 +16,28 @@ export const dynamic = "force-dynamic";
 async function fetchBoardMembers(): Promise<BoardMember[]> {
   try {
     const supabase = getSupabaseServer();
-    const { data, error } = await supabase
-      .from("board_members")
-      .select("*")
-      .order("fullName");
+    const { data, error } = await supabase.from("board_members").select("*");
 
     if (error) {
       console.error("Yönetim kurulu yüklenirken hata:", error);
       return [];
     }
 
-    return (data as unknown as BoardMember[]) ?? [];
+    const arr = (data as unknown as BoardMember[]) ?? [];
+    // İlk eklenen en üstte: created_at / inserted_at / joinDate / fallback
+    const getTime = (m: unknown) => {
+      const rec = m as Record<string, unknown>;
+      return (
+        new Date(
+          (rec["created_at"] as string) ||
+            (rec["inserted_at"] as string) ||
+            (rec["joinDate"] as string) ||
+            "" ||
+            0
+        ).getTime() || 0
+      );
+    };
+    return [...arr].sort((a, b) => getTime(a) - getTime(b));
   } catch (err) {
     console.error("Yönetim kurulu yüklenirken genel hata:", err);
     return [];
@@ -132,9 +143,6 @@ export default async function ManagementPage() {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 bg-gray-300 uppercase tracking-wider">
                     Ad Soyad
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 bg-gray-300 uppercase tracking-wider">
-                    Ünvan
-                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -142,9 +150,6 @@ export default async function ManagementPage() {
                   <tr key={member.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       {member.fullName}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {member.position}
                     </td>
                   </tr>
                 ))}

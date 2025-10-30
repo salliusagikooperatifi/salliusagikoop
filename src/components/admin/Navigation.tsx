@@ -19,8 +19,8 @@ export default function Navigation() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    // Doğrudan window.location ile yönlendir
-    window.location.href = "/login";
+    // History'e eklemeden yönlendir
+    router.replace("/login");
   };
 
   return (
@@ -32,7 +32,7 @@ export default function Navigation() {
           height: "100vh",
           background: "#111827",
           color: "#fff",
-          padding: 16,
+          padding: 12,
           display: "flex",
           flexDirection: "column",
         }}
@@ -40,7 +40,7 @@ export default function Navigation() {
         <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 16 }}>
           Yönetim Paneli
         </div>
-        <nav style={{ display: "grid", gap: 8, flexGrow: 1 }}>
+        <nav style={{ display: "grid", gap: 6, flexGrow: 1 }}>
           {navItems.map((item) => {
             const active = pathname === item.href;
             return (
@@ -49,12 +49,15 @@ export default function Navigation() {
                 href={item.href}
                 style={{
                   display: "block",
-                  padding: "10px 12px",
+                  padding: "8px 10px",
+                  minHeight: 36,
+                  lineHeight: "20px",
                   borderRadius: 8,
                   color: active ? "#111827" : "#e5e7eb",
                   background: active ? "#f59e0b" : "transparent",
                   textDecoration: "none",
                   fontWeight: 600,
+                  fontSize: 14,
                 }}
               >
                 {item.label}
@@ -65,13 +68,17 @@ export default function Navigation() {
         <button
           onClick={handleLogout}
           style={{
+            width: "100%",
             padding: "10px 12px",
-            borderRadius: 8,
-            background: "#ef4444",
+            borderRadius: 10,
+            background: "#dc2626",
             color: "#fff",
             border: "none",
-            fontWeight: 600,
+            fontWeight: 700,
+            fontSize: 14,
             cursor: "pointer",
+            boxShadow: "0 4px 12px rgba(220,38,38,0.35)",
+            marginTop: 8,
           }}
         >
           Çıkış Yap

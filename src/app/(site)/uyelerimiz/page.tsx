@@ -16,10 +16,7 @@ export const dynamic = "force-dynamic";
 async function fetchMembers(): Promise<Member[]> {
   try {
     const supabase = getSupabaseServer();
-    const { data, error } = await supabase
-      .from("members")
-      .select("*")
-      .order("name");
+    const { data, error } = await supabase.from("members").select("*");
 
     if (error) {
       console.error("Üyeler yüklenirken hata:", error);
@@ -38,7 +35,22 @@ async function fetchMembers(): Promise<Member[]> {
       })
     );
 
-    return membersWithFullName as Member[];
+    // İlk eklenen en üstte: created_at / inserted_at / joinDate / fallback
+    const getTime = (m: unknown) => {
+      const rec = m as Record<string, unknown>;
+      const stamp =
+        (rec["created_at"] as string) ||
+        (rec["inserted_at"] as string) ||
+        (rec["joinDate"] as string) ||
+        "";
+      return new Date(stamp || 0).getTime() || 0;
+    };
+
+    const sorted = (membersWithFullName as Array<Record<string, unknown>>).sort(
+      (a, b) => getTime(a) - getTime(b)
+    );
+
+    return sorted as unknown as Member[];
   } catch (err) {
     console.error("Üyeler yüklenirken genel hata:", err);
     return [];

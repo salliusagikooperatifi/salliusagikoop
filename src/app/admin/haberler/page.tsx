@@ -131,6 +131,35 @@ export default function AdminNewsPage() {
     return { original1600, medium800, small400 };
   }
 
+  function slugifyTitle(raw: string) {
+    const map: Record<string, string> = {
+      ç: "c",
+      ğ: "g",
+      ı: "i",
+      i: "i",
+      ö: "o",
+      ş: "s",
+      ü: "u",
+      Ç: "c",
+      Ğ: "g",
+      I: "i",
+      İ: "i",
+      Ö: "o",
+      Ş: "s",
+      Ü: "u",
+    };
+    const replaced = (raw || "")
+      .split("")
+      .map((ch) => map[ch] ?? ch)
+      .join("");
+    return replaced
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
+  }
+
   async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -142,12 +171,7 @@ export default function AdminNewsPage() {
       return;
     }
 
-    const safeSlug = (title || "haber")
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9çğıöşü\s-]/g, "")
-      .replace(/\s+/g, "-")
-      .replace(/-+/g, "-");
+    const safeSlug = slugifyTitle(title || "haber");
 
     setUploading(true);
     try {
