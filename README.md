@@ -158,3 +158,5 @@ Not: Canlıya çıkmadan önce yetkilendirme politikalarını kısıtlayın ve S
 9. Hata sayfası
 
 - `src/app/not-found.tsx` mevcut.
+
+denme123
