@@ -4,12 +4,13 @@ import { supabase } from "@/lib/supabaseClient";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Home } from "lucide-react";
+import { Home, Eye, EyeOff } from "lucide-react";
 import Toast, { ToastType } from "@/components/Toast";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState<{
     message: string;
@@ -133,13 +134,43 @@ export default function LoginPage() {
           <label style={{ fontSize: 12, fontWeight: 700, color: "#374151" }}>
             Şifre
           </label>
-        <input
-          type="password"
-          placeholder="Şifre"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{ padding: 10, borderRadius: 8, border: "1px solid #e5e7eb" }}
-        />
+          <div style={{ position: "relative" }}>
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Şifre"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{
+                padding: "10px 40px 10px 10px",
+                borderRadius: 8,
+                border: "1px solid #e5e7eb",
+                width: "100%",
+              }}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((v) => !v)}
+              aria-label={showPassword ? "Şifreyi gizle" : "Şifreyi göster"}
+              title={showPassword ? "Şifreyi gizle" : "Şifreyi göster"}
+              style={{
+                position: "absolute",
+                right: 8,
+                top: "50%",
+                transform: "translateY(-50%)",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 28,
+                height: 28,
+                borderRadius: 6,
+                border: "1px solid #e5e7eb",
+                background: "#f9fafb",
+                cursor: "pointer",
+              }}
+            >
+              {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+            </button>
+          </div>
         <button
           type="submit"
           disabled={loading}

@@ -103,15 +103,17 @@ const Header = () => {
           <div className="shrink-0">
             <Link href="/" className="flex items-center">
               <div className="h-10 w-10 bg-linear-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">Ş</span>
+                <span className="text-white font-bold text-lg">Logo</span>
               </div>
               <div className="ml-3">
-                <h1 className="text-xl font-bold text-gray-900">
-                  Ş a l l ı u ş a ğ ı
-                </h1>
-                <p className="text-sm text-gray-600">
-                  Üretim ve Pazarlama Kooperatifi
-                </p>
+                <div className="w-fit">
+                  <h1 className="block w-full text-xl font-bold text-gray-900">
+                    Ş a l l ı u ş a ğ ı
+                  </h1>
+                  <p className="block w-full text-xs text-gray-600">
+                    Üretim ve Pazarlama Kooperatifi
+                  </p>
+                </div>
               </div>
             </Link>
           </div>
