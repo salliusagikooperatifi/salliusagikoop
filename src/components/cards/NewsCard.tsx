@@ -41,7 +41,7 @@ const NewsCard = ({
           <div className="flex-1 min-w-0">
             <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 mb-1">
               <Link
-                href={`/haberler/${encodeURIComponent(news.slug)}`}
+                href={`/haberler/${news.slug}`}
                 className="hover:text-green-600 transition-colors"
               >
                 {news.title}
@@ -94,7 +94,7 @@ const NewsCard = ({
               <span>{formatDate(news.publishedAt)}</span>
             </div>
             <Link
-              href={`/haberler/${encodeURIComponent(news.slug)}`}
+              href={`/haberler/${news.slug}`}
               className="text-green-600 hover:text-green-700 font-medium"
             >
               Devamını Oku →
@@ -122,7 +122,7 @@ const NewsCard = ({
         <div className="mb-3">
           <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
             <Link
-              href={`/haberler/${encodeURIComponent(news.slug)}`}
+              href={`/haberler/${news.slug}`}
               className="hover:text-green-600 transition-colors"
             >
               {news.title}

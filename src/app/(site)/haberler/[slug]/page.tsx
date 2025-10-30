@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 interface NewsDetailPageProps {
-  params: Promise<{ slug: string }>; // Promise-based params
+  params: { slug: string };
 }
 
 async function fetchNewsBySlug(slug: string): Promise<NewsItem | null> {
@@ -34,7 +34,7 @@ async function fetchNewsBySlug(slug: string): Promise<NewsItem | null> {
 }
 
 export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
-  const { slug } = await params;
+  const { slug } = params;
   const news = await fetchNewsBySlug(slug);
   if (!news) {
     notFound();
