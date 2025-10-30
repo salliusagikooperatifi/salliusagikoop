@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Hakkımızda | Şallıuşağı Kooperatifi",
+  description:
+    "Kooperatifimizin misyonu, vizyonu ve değerleri. Bölgesel kalkınma ve sürdürülebilir üretim için çalışmalarımız.",
+};
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Breadcrumbs from "@/components/Breadcrumbs";

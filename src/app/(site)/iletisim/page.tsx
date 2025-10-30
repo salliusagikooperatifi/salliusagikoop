@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "İletişim | Şallıuşağı Kooperatifi",
+  description:
+    "Adres, telefon ve e-posta bilgilerimiz. Bize ulaşın, sorularınızı yanıtlayalım.",
+};
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Breadcrumbs from "@/components/Breadcrumbs";

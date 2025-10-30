@@ -29,7 +29,7 @@ const NewsCard = ({
       >
         <div className="flex space-x-4">
           {news.featuredImage && (
-            <div className="relative w-20 h-20 flex-shrink-0">
+            <div className="relative w-20 h-20 shrink-0">
               <Image
                 src={news.featuredImage}
                 alt={news.title}

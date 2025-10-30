@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Üyelerimiz | Şallıuşağı Kooperatifi",
+  description:
+    "Kooperatifimizin üyeleri ve katkı sağlayan paydaşlarımız. Birlikte daha güçlü bir topluluk.",
+};
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -159,7 +166,7 @@ export default async function MembersPage() {
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-green-600 mr-3 mt-1 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -180,7 +187,7 @@ export default async function MembersPage() {
                 </li>
                 <li className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-green-600 mr-3 mt-1 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -203,7 +210,7 @@ export default async function MembersPage() {
                 </li>
                 <li className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-green-600 mr-3 mt-1 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -226,7 +233,7 @@ export default async function MembersPage() {
                 </li>
                 <li className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-green-600 mr-3 mt-1 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -256,7 +263,7 @@ export default async function MembersPage() {
               </h3>
               <div className="space-y-6">
                 <div className="flex items-start">
-                  <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0 text-sm font-bold">
+                  <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center mr-4 shrink-0 text-sm font-bold">
                     1
                   </div>
                   <div>
@@ -269,7 +276,7 @@ export default async function MembersPage() {
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0 text-sm font-bold">
+                  <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center mr-4 shrink-0 text-sm font-bold">
                     2
                   </div>
                   <div>
@@ -282,7 +289,7 @@ export default async function MembersPage() {
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0 text-sm font-bold">
+                  <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center mr-4 shrink-0 text-sm font-bold">
                     3
                   </div>
                   <div>
@@ -293,7 +300,7 @@ export default async function MembersPage() {
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center mr-4 flex-shrink-0 text-sm font-bold">
+                  <div className="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center mr-4 shrink-0 text-sm font-bold">
                     4
                   </div>
                   <div>

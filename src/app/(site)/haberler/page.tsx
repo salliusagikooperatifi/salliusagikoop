@@ -6,6 +6,13 @@ import SupabaseRealtimeRefresher from "@/components/SupabaseRealtimeRefresher";
 import { getSupabaseServer } from "@/lib/supabase/server";
 import { BreadcrumbItem, NewsItem } from "@/lib/types";
 export const dynamic = "force-dynamic";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Haberler | Şallıuşağı Kooperatifi",
+  description:
+    "Kooperatifimizden güncel haberler, gelişmeler ve duyurular. Etkinlikler ve başarı hikayeleri.",
+};
 
 async function fetchNews(): Promise<NewsItem[]> {
   try {

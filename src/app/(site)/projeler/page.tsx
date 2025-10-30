@@ -1,4 +1,10 @@
-"use client";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Projeler | Şallıuşağı Kooperatifi",
+  description:
+    "Kooperatifimizin yürüttüğü ve planlanan projeler. Tarım, üretim ve toplumsal fayda odaklı çalışmalar.",
+};
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Breadcrumbs from "@/components/Breadcrumbs";

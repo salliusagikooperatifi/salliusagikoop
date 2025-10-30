@@ -1,12 +1,19 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import ProjectCard from "@/components/cards/ProjectCard";
 import NewsCard from "@/components/cards/NewsCard";
+import AnnouncementCard from "@/components/cards/AnnouncementCard";
 import { mockProjects } from "@/lib/mockData";
 import { getSupabaseServer } from "@/lib/supabase/server";
 import { Announcement, NewsItem } from "@/lib/types";
 export const dynamic = "force-dynamic";
+export const metadata: Metadata = {
+  title: "Şallıuşağı Kooperatifi | Anasayfa",
+  description:
+    "Kooperatifimizin projeleri, haberleri ve duyuruları. Sürdürülebilir üretim ve toplumsal fayda için çalışıyoruz.",
+};
 import RotatingText from "@/components/RotatingText";
 
 async function fetchLatestNews(): Promise<NewsItem[]> {
@@ -207,89 +214,12 @@ export default async function HomePage() {
             {importantAnnouncements.length > 0 ? (
               <div className="space-y-6">
                 {importantAnnouncements.map((announcement) => (
-                  <div
+                  <AnnouncementCard
                     key={announcement.id}
-                    className={`group rounded-xl border-l-4 bg-white/80 backdrop-blur-sm shadow-sm transition-all duration-300 hover:-translate-x-1 hover:shadow-xl ${
-                      announcement.isImportant
-                        ? "border-red-300"
-                        : "border-green-300"
-                    }`}
-                  >
-                    <div className="p-6">
-                      <div className="flex items-start gap-4">
-                        <div
-                          className={`flex size-12 shrink-0 items-center justify-center rounded-xl shadow-sm ring-1 ring-black/5 transition-all duration-300 group-hover:scale-110 ${
-                            announcement.isImportant
-                              ? "bg-white-100"
-                              : "bg-white-100"
-                          }`}
-                        >
-                          <svg
-                            className={`size-6 ${
-                              announcement.isImportant
-                                ? "text-red-300"
-                                : "text-green-300"
-                            }`}
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
-                            />
-                          </svg>
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-start justify-between mb-2">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                              {announcement.title}
-                            </h3>
-                            {announcement.isImportant && (
-                              <span className="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full shrink-0">
-                                Önemli
-                              </span>
-                            )}
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2 text-sm text-gray-500">
-                              <span>
-                                {new Date(announcement.date).toLocaleDateString(
-                                  "tr-TR",
-                                  {
-                                    year: "numeric",
-                                    month: "long",
-                                    day: "numeric",
-                                  }
-                                )}
-                              </span>
-                            </div>
-                            <Link
-                              href="/duyurular"
-                              className="inline-flex items-center text-green-600 text-sm font-medium hover:text-green-700 hover:underline transition-colors duration-200"
-                            >
-                              Duyurulara Git
-                              <svg
-                                className="w-4 h-4 ml-1"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M9 5l7 7-7 7"
-                                />
-                              </svg>
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    announcement={
+                      announcement as unknown as import("@/lib/types").Announcement
+                    }
+                  />
                 ))}
               </div>
             ) : (

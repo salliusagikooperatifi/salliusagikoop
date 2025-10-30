@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Yönetim | Şallıuşağı Kooperatifi",
+  description:
+    "Kooperatifimizin yönetim kadrosu ve görev dağılımları. Şeffaf ve hesap verebilir yönetim anlayışı.",
+};
 import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -167,7 +174,7 @@ export default async function ManagementPage() {
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-green-600 mr-3 mt-1 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -190,7 +197,7 @@ export default async function ManagementPage() {
                 </li>
                 <li className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-green-600 mr-3 mt-1 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -213,7 +220,7 @@ export default async function ManagementPage() {
                 </li>
                 <li className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-green-600 mr-3 mt-1 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -236,7 +243,7 @@ export default async function ManagementPage() {
                 </li>
                 <li className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-green-600 mr-3 mt-1 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -267,7 +274,7 @@ export default async function ManagementPage() {
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-purple-600 mr-3 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-purple-600 mr-3 mt-1 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -290,7 +297,7 @@ export default async function ManagementPage() {
                 </li>
                 <li className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-purple-600 mr-3 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-purple-600 mr-3 mt-1 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -311,7 +318,7 @@ export default async function ManagementPage() {
                 </li>
                 <li className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-purple-600 mr-3 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-purple-600 mr-3 mt-1 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -334,7 +341,7 @@ export default async function ManagementPage() {
                 </li>
                 <li className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-purple-600 mr-3 mt-1 flex-shrink-0"
+                    className="w-6 h-6 text-purple-600 mr-3 mt-1 shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

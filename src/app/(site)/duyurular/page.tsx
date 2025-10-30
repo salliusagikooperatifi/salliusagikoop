@@ -6,6 +6,13 @@ import { getSupabaseServer } from "@/lib/supabase/server";
 import { BreadcrumbItem, Announcement } from "@/lib/types";
 import { Megaphone } from "lucide-react";
 export const dynamic = "force-dynamic";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Duyurular | Şallıuşağı Kooperatifi",
+  description:
+    "Kooperatifimizden önemli duyurular ve bilgilendirmeler. Üyelerimize ve kamuoyuna iletişimlerimiz.",
+};
 
 async function fetchAnnouncements(): Promise<Announcement[]> {
   try {
