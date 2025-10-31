@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     siteName: "Şallıuşağı Kooperatifi",
     images: [
       {
-        url: "/images/logo/logo.avif",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Şallıuşağı Üretim ve Pazarlama Kooperatifi",
