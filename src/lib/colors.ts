@@ -13,6 +13,9 @@ export const colors = {
     800: "#075985",
     900: "#0c4a6e",
   },
+  logoColor: {
+    primaryLogoColor: "#e41e25",
+  },
 
   // Doğa temalı yeşil tonları
   secondary: {

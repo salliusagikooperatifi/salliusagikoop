@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
@@ -102,12 +103,18 @@ const Header = () => {
           {/* Logo */}
           <div className="shrink-0">
             <Link href="/" className="flex items-center">
-              <div className="h-10 w-10 bg-linear-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">Logo</span>
+              <div className="relative h-14 w-14">
+                <Image
+                  src="/images/logo/logo.avif"
+                  alt="Şallıuşağı Üretim ve Pazarlama Kooperatifi Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
               </div>
-              <div className="ml-3">
+              <div className="ml-1">
                 <div className="w-fit">
-                  <h1 className="block w-full text-xl font-bold text-gray-900">
+                  <h1 className="block w-full text-xl font-bold text-black">
                     Ş a l l ı u ş a ğ ı
                   </h1>
                   <p className="block w-full text-xs text-gray-600">

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { contactInfo } from "@/lib/mockData";
+import Image from "next/image";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -39,16 +40,29 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Logo ve Açıklama */}
           <div>
-            <div className="flex items-center mb-4">
-              <div className="h-10 w-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">Ş</span>
-              </div>
-              <div className="ml-3">
-                <h3 className="text-lg font-bold">Şallıuşağı</h3>
-                <p className="text-sm text-gray-400">
-                  Üretim ve Pazarlama Kooperatifi
-                </p>
-              </div>
+            {/* Logo */}
+            <div className="shrink-0 mb-4">
+              <Link href="/" className="flex items-center">
+                <div className="relative h-14 w-14 overflow-hidden rounded-lg">
+                  <Image
+                    src="/images/logo/logo.avif"
+                    alt="Şallıuşağı Üretim ve Pazarlama Kooperatifi Logo"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+                <div className="ml-3">
+                  <div className="w-fit">
+                    <h1 className="block w-full text-xl font-bold text-white">
+                      Ş a l l ı u ş a ğ ı
+                    </h1>
+                    <p className="block w-full text-xs text-white">
+                      Üretim ve Pazarlama Kooperatifi
+                    </p>
+                  </div>
+                </div>
+              </Link>
             </div>
             <p className="text-gray-400 text-sm mb-4">
               Sürdürülebilir tarım ve üretim faaliyetleriyle bölgesel kalkınmaya
