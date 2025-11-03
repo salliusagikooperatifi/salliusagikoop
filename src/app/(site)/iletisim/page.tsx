@@ -130,16 +130,6 @@ export default function ContactPage() {
                           </a>
                         </p>
                       )}
-                      {contactInfo.email.support && (
-                        <p className="text-gray-600">
-                          <a
-                            href={`mailto:${contactInfo.email.support}`}
-                            className="hover:text-green-600 transition-colors"
-                          >
-                            {contactInfo.email.support}
-                          </a>
-                        </p>
-                      )}
                     </div>
                   </div>
                 </div>

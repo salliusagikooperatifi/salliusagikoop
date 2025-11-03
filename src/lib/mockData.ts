@@ -42,7 +42,12 @@ export const mockProjects: Project[] = [
     shortDescription:
       "Süt, besi ve küçükbaş üretiminde modern altyapı ve sürdürülebilir hayvancılık modeli.",
     category: "hayvansal-uretim",
-    images: ["/images/projects/hayvansal-uretim/hayvansaluretim.jpg"],
+    images: [
+      "/images/projects/hayvansal-uretim/hayvansaluretim.jpg",
+      "/images/projects/hayvansal-uretim/koyun-kuzu.jpg",
+      "/images/projects/hayvansal-uretim/tavuk.jpg",
+      "/images/projects/hayvansal-uretim/sut.jpg",
+    ],
     status: "planning",
     startDate: "2024-01-01",
     budget: 0,
@@ -100,7 +105,7 @@ export const mockProjects: Project[] = [
     title: "Tarımsal Sanayi Projeleri",
     slug: "tarimsal-sanayi",
     description:
-      "Köyümüzde yapılacak üretim projelerine göre planlanacak olup, önemli gördüklerimiz aşağıda verilmiştir.\n\n- Süt toplama ve Soğutma Merkezi\n\nKöyümüzde ve komşu köylerde üretilen süt miktarına göre planlanacaktır. Bölgede günlük en az 5000 litre çiğ süt varsa böyle bir tesis planlanabilir. Ayrıca sürekli dondurma firmaları bizzat köyümüze gelip, sütümüzü alırsa böyle bir projeye girişilecektir.\n\n- Zeytinyağı üretim tesisi\n\nPazarcık, Narlı ve diğer civar ilçelerdeki yağlık zeytin rekoltesine bakılarak ve de bölgede başka üretim tesislerinin olup, olmadığı incelenerek sonuçlarına göre karar verilecektir.\n\n- Badem-Ceviz ve Fıstık Çıtlatma ve işleme Tesisi\n\nPazarcık, Narlı ve diğer civar ilçelerdeki ürün rekoltelerine bakılarak ve de bölgede başka üretim tesislerinin olup, olmadığı incelenerek sonuçlarına göre karar verilecektir.",
+      "Köyümüzde yapılacak üretim projelerine göre planlanacak olup, önemli gördüklerimiz aşağıda verilmiştir.\n\n● SÜT TOPLAMA VE SOĞUTMA MERKEZİ\nKöyümüzde ve komşu köylerde üretilen süt miktarına göre planlanacaktır. Bölgede günlük en az 5000 litre çiğ süt varsa böyle bir tesis planlanabilir. Ayrıca sürekli dondurma firmaları bizzat köyümüze gelip, sütümüzü alırsa böyle bir projeye girişilecektir.\n\n● ZEYTİNYAĞI ÜRETİM TESİSİ\nPazarcık, Narlı ve diğer civar ilçelerdeki yağlık zeytin rekoltesine bakılarak ve de bölgede başka üretim tesislerinin olup, olmadığı incelenerek sonuçlarına göre karar verilecektir.\n\n● BADEM-CEVİZ VE FISTIK ÇITLATMA VE İŞLEME TESİSİ\nPazarcık, Narlı ve diğer civar ilçelerdeki ürün rekoltelerine bakılarak ve de bölgede başka üretim tesislerinin olup, olmadığı incelenerek sonuçlarına göre karar verilecektir.",
     shortDescription:
       "Süt, zeytinyağı ve fıstık işleme tesisleriyle üretime değer katan sanayi projeleri.",
     category: "tarimsal-sanayi",
@@ -438,7 +443,7 @@ export const mockProjects: Project[] = [
     shortDescription:
       "Gençlere ve yetişkinlere yönelik eğitim, spor ve sosyal gelişim odaklı merkezler.",
     category: "egitim-spor-merkezi",
-    images: ["/images/projects/egitim-spor-merkezi/egitimspormerkezi.jpg"],
+    images: ["/images/projects/egitim-spor-merkezi/halı-saha.jpg"],
     status: "planning",
     startDate: "2024-09-01",
     budget: 2800000,
@@ -601,7 +606,7 @@ export const contactInfo: ContactInfo = {
   },
   email: {
     primary: "info@salliusagikoop.com",
-    info: "bilgi@salliusagikoop.com",
+    info: "salliusagikooperatifi@gmail.com",
     support: "destek@salliusagikoop.com",
   },
   socialMedia: {

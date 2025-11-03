@@ -264,16 +264,39 @@ export default async function HomePage() {
           </div>
           <div className="max-w-4xl mx-auto">
             {importantAnnouncements.length > 0 ? (
-              <div className="space-y-6">
-                {importantAnnouncements.map((announcement) => (
-                  <AnnouncementCard
-                    key={announcement.id}
-                    announcement={
-                      announcement as unknown as import("@/lib/types").Announcement
-                    }
-                  />
-                ))}
-              </div>
+              <>
+                <div className="space-y-6">
+                  {importantAnnouncements.map((announcement) => (
+                    <AnnouncementCard
+                      key={announcement.id}
+                      announcement={
+                        announcement as unknown as import("@/lib/types").Announcement
+                      }
+                    />
+                  ))}
+                </div>
+                <div className="text-center mt-8">
+                  <Link
+                    href="/duyurular"
+                    className="inline-flex items-center bg-green-600 text-white font-medium px-6 py-3 rounded-lg hover:bg-green-700 transition-colors duration-200"
+                  >
+                    Tüm Duyuruları Görüntüle
+                    <svg
+                      className="w-5 h-5 ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </Link>
+                </div>
+              </>
             ) : (
               <div className="text-center py-12">
                 <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">

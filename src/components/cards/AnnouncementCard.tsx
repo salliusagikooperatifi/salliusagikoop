@@ -18,12 +18,12 @@ const AnnouncementCard = ({
     });
   };
 
-  const summary = (announcement.content || "")
+  // Tüm içeriği göster - HTML etiketlerini temizle
+  const cleanContent = (announcement.content || "")
     .replace(/<[^>]+>/g, " ")
     .replace(/&nbsp;/g, " ")
     .replace(/\s+/g, " ")
-    .trim()
-    .slice(0, 140);
+    .trim();
 
   return (
     <div
@@ -54,8 +54,10 @@ const AnnouncementCard = ({
                 </>
               )}
             </div>
-            {summary && (
-              <p className="text-gray-700 text-sm line-clamp-3">{summary}</p>
+            {cleanContent && (
+              <p className="text-gray-700 text-sm whitespace-pre-line">
+                {cleanContent}
+              </p>
             )}
           </div>
         </div>
