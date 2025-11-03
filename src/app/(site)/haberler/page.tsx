@@ -90,10 +90,11 @@ export default async function NewsPage() {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  Haber bulunamadı
+                  Haberler
                 </h3>
                 <p className="text-gray-600 text-base md:text-lg">
-                  Henüz haber bulunmamaktadır.
+                  Kooperatifimizin faaliyetlerine yönelik haberleri buradan
+                  takip edebilirsiniz.
                 </p>
               </div>
             ) : (
@@ -108,6 +109,7 @@ export default async function NewsPage() {
       </Section>
 
       {/* Newsletter */}
+      {/* Şimdilik gizlendi 
       <Section background="blue" padding="xl">
         <Container>
           <div className="text-center text-white">
@@ -132,6 +134,7 @@ export default async function NewsPage() {
           </div>
         </Container>
       </Section>
+      */}
     </div>
   );
 }

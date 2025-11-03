@@ -7,7 +7,7 @@ export const mockProjects: Project[] = [
     title: "Özel Ağaçlandırma Projesi",
     slug: "ozel-agaclandirma",
     description:
-      "Bölgemizde sürdürülebilir orman yönetimi ve çevre koruma amacıyla başlatılan kapsamlı ağaçlandırma projesi. Bu proje ile hem çevresel hem de ekonomik faydalar sağlanması hedeflenmektedir.",
+      "Bilindiği üzere Köyümüz sınırları içerisinde kalmış ve Orman vasfını yitirmiş arazileri öncelikle Orman Köylüsü olarak bireysel başvurular 2019-2024 yılları arasında çeşitli bireysel başvurular yapılmış ve tüm başvurular red edilmiştir.\n\nBu defa tüm köyümüz adına ve köyümüzün ortak başvurusu olarak Kooperatifimiz üzerinden yeni projeler hazırlattırarak başvurmayı planlıyoruz.\n\nBu başvuruda köyümüzün kahir ekseriyetinin ve özellikle köyde yaşayan dostlarımızın uygun görüşüyle yapmayı planlıyoruz.\n\nUygun bir zamanda Kooperatif yönetimi olarak köyümüzü ziyaret ederek tüm dostları bilgilendirmeyi planlıyoruz.",
     shortDescription:
       "Erozyonu önleyen, doğal kaynakları koruyarak, çevre dostu ağaçlandırma ve karbon emisyonunu azaltma çalışması.",
     category: "ozel-agaclandirma",
@@ -38,7 +38,7 @@ export const mockProjects: Project[] = [
     title: "Hayvansal Üretim Projeleri",
     slug: "hayvansal-uretim",
     description:
-      "Büyükbaş süt, büyükbaş besi ve küçükbaş üretim altyapılarının geliştirilmesi ve verimliliğin artırılması.",
+      "Köyümüzün resmi sınırları içerisinde köyümüze ait çok büyük tapulu tarım arazileri olmadığından, köyümüz dağlık ve ormanlık arazilerde hayvancılık yapmaya çok müsait olduğunu düşünüyoruz.\n\nBu nedenle kooperatifimiz adına köyde hayvancılık yapmak isteyen ve aşağıdaki hayvancılık türlerine göre projeler üreteceğiz. Bunlar;\n\n- Büyükbaş Süt İnekçiliği\n\n- Büyükbaş Besicilik\n\n- Küçükbaş Yetiştiriciliği\n\n- Kanatlı Yetiştiriciliği (Et veya Yumurta Tavukçuluğu)\n\nKooperatifimiz köyde Hayvancılık Yapmak isteyenlerle bire bir temaslar kurarak ve toplantılar yaparak onlar adına devletin teşvik ve desteklerinden yararlanarak projeler geliştireceklerdir.",
     shortDescription:
       "Süt, besi ve küçükbaş üretiminde modern altyapı ve sürdürülebilir hayvancılık modeli.",
     category: "hayvansal-uretim",
@@ -69,7 +69,7 @@ export const mockProjects: Project[] = [
     title: "Bitkisel Üretim Projeleri",
     slug: "bitkisel-uretim",
     description:
-      "Seracılık ve meyve bahçesi ile yıl boyu üretim ve modern sulama altyapıları.",
+      "Köyümüzde sulu ve kuru tarım arazisi oldukça yetersiz. Ancak buna rağmen Sera kurulabilecek ve kapalı ortamda bitkisel üretim yapılabilecek alan ve arazilerin değerlendirilmesi hedeflerimiz arasındadır.\n\nKöyde veya bölgede ürettiğimiz tüm ürünler doğal ve organik olarak yapılacağından tamamını Avrupa pazarlarına ihracat yapmayı planlıyoruz.\n\nBu amaçla aşağıdaki projelerin gerçekleştirilmesini planlıyoruz.\n\n- Seracılık Projeleri\n\n- Aromatik Bitki Üretimi\n\n- Tropikal meyve üretim (Yaban Mersin'i, Avokado, ejder meyvesi vesaire)",
     shortDescription:
       "Seracılık ve meyve bahçeleriyle yıl boyu üretim, verimlilik ve tarımsal kalkınma",
     category: "bitkisel-uretim",
@@ -100,7 +100,7 @@ export const mockProjects: Project[] = [
     title: "Tarımsal Sanayi Projeleri",
     slug: "tarimsal-sanayi",
     description:
-      "Süt toplama ve soğutma, zeytinyağı üretimi ve fıstık işleme-paketleme tesisleri.",
+      "Köyümüzde yapılacak üretim projelerine göre planlanacak olup, önemli gördüklerimiz aşağıda verilmiştir.\n\n- Süt toplama ve Soğutma Merkezi\n\nKöyümüzde ve komşu köylerde üretilen süt miktarına göre planlanacaktır. Bölgede günlük en az 5000 litre çiğ süt varsa böyle bir tesis planlanabilir. Ayrıca sürekli dondurma firmaları bizzat köyümüze gelip, sütümüzü alırsa böyle bir projeye girişilecektir.\n\n- Zeytinyağı üretim tesisi\n\nPazarcık, Narlı ve diğer civar ilçelerdeki yağlık zeytin rekoltesine bakılarak ve de bölgede başka üretim tesislerinin olup, olmadığı incelenerek sonuçlarına göre karar verilecektir.\n\n- Badem-Ceviz ve Fıstık Çıtlatma ve işleme Tesisi\n\nPazarcık, Narlı ve diğer civar ilçelerdeki ürün rekoltelerine bakılarak ve de bölgede başka üretim tesislerinin olup, olmadığı incelenerek sonuçlarına göre karar verilecektir.",
     shortDescription:
       "Süt, zeytinyağı ve fıstık işleme tesisleriyle üretime değer katan sanayi projeleri.",
     category: "tarimsal-sanayi",
@@ -131,7 +131,7 @@ export const mockProjects: Project[] = [
     title: "El Sanatları Halı-Kilim Üretim Projeleri",
     slug: "el-sanatlari-hali-kilim",
     description:
-      "Geleneksel dokuma, eğitim ve kooperatif markasıyla satış kanallarının geliştirilmesi.",
+      "Köyümüzde yaşayan 15-55 yaş arası kadınlarımızın, kızlarımızın gençlerimizin boş vakitlerini değerlendirme ve aile bütçesine katkı sağlamak amacıyla planladığımız bir projedir.\n\nBu projeyi de köyümüzde yapacağımız toplantıda detaylı olarak görüşerek böyle bir talep olması halinde gerçekleştirmeye çalışacağız.\n\nÜretilen tüm ürünleri Kooperatifimiz adına yurtdışındaki köylülerimiz aracılığı ile pazarlayacağız.",
     shortDescription:
       "Geleneksel el sanatlarını modern üretimle buluşturan kültürel ve ekonomik girişim.",
     category: "el-sanatlari-hali-kilim",
@@ -434,7 +434,7 @@ export const mockProjects: Project[] = [
     title: "Eğitim ve Spor Merkezi",
     slug: "egitim-spor-merkezi",
     description:
-      "Bölge halkı için modern eğitim ve spor tesisleri. Çocuklar ve gençler için eğitim programları, yetişkinler için meslek edindirme kursları.",
+      "Spor insan hayatının en olumlu bir hobisidir. Yetenekli çocuklarımız bu işi profesyonel olarak da meslek olarak yapabilmeli düşüncesindeyiz.\n\nYazın yurtdışından gelen çocuklarımız da bu tesislerde vakit geçirerek köydeki sosyal çekiciliğin farkına varırlar.\n\nBunun için maksimum 3000m2 bir alanda bir spor kompleksimiz olur, bu tesiste;\n\n- Futbol Halı Saha\n\n- Basket Sahası\n\n- Voleybol Sahası\n\n- Masa Tenisi Odası\n\n- Soyunma Giyinme\n\n- Yönetim Odasından\n\noluşan bir spor tesisi kurulabilir.",
     shortDescription:
       "Gençlere ve yetişkinlere yönelik eğitim, spor ve sosyal gelişim odaklı merkezler.",
     category: "egitim-spor-merkezi",

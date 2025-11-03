@@ -83,9 +83,12 @@ export default async function MembersPage() {
               Üyelerimiz
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Kooperatifimizin güçlü üye ailesi. Birlikte büyüyor, birlikte
-              gelişiyoruz. Her üyemiz, kooperatifimizin başarısında önemli bir
-              rol oynar.
+              Bizler kendi çevremizdeki üyelerden oluşan insanlarla yola çıktık.
+              Ancak tüm köyümüz ve yurtdışındaki veya köy dışındaki Şallıuşağı
+              nüfusuna kayıtlı herkesi kooperatifimize üye olmaya davet ediyoruz
+              Kooperatifimizin güçlü üye ailesi çoğaldıkça birlikte büyür,
+              birlikte gelişiriz. Her yeni üyemiz, kooperatifimizin başarısında
+              önemli bir rol oynar.
             </p>
           </div>
         </Container>
@@ -159,6 +162,7 @@ export default async function MembersPage() {
       </Section>
 
       {/* Üyelik Bilgileri */}
+      {/* Şimdilik gizlendi 
       <Section background="white" padding="xl">
         <Container>
           <div className="text-center mb-12">
@@ -329,7 +333,7 @@ export default async function MembersPage() {
           </div>
         </Container>
       </Section>
-
+      */}
       {/* CTA Section */}
       <Section background="green" padding="xl">
         <Container>

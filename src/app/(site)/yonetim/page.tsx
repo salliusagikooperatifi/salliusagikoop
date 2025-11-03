@@ -131,8 +131,12 @@ export default async function ManagementPage() {
               Denetim Kurulu
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Kooperatifimizin mali ve idari işlerini denetleyen bağımsız
-              denetim kurulu üyelerimiz
+              Kooperatifimizin Muhasebe ve kuruluş iş ve işlemlerimizi yürüten
+              Mali Müşavirimiz ile Ankara’da tüm projelerimizde görev alan ve de
+              Kooperatifin kuruluşunu gerçekleştiren müşavirlik mühendislik
+              hizmetlerimizi yürüten firma yetkilisi bağımsız denetim kurulu
+              üyelerimizi oluşturmaktadır. Bizlerin Bağımsız ve tarafsız
+              denetime çok ihtiyacı olduğu için böyle bir tercih yaptık.
             </p>
           </div>
 
@@ -160,6 +164,7 @@ export default async function ManagementPage() {
       </Section>
 
       {/* Yönetim Yapısı */}
+      {/* Şimdilik gizlendi 
       <Section background="white" padding="xl">
         <Container>
           <div className="text-center mb-12">
@@ -447,6 +452,7 @@ export default async function ManagementPage() {
           </div>
         </Container>
       </Section>
+        
       */}
     </div>
   );

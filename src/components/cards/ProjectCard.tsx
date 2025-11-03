@@ -10,7 +10,7 @@ interface ProjectCardProps {
 const ProjectCard = ({ project, className = "" }: ProjectCardProps) => {
   return (
     <div
-      className={`group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden h-[460px] w-full ${className}`}
+      className={`group bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden h-[360px] w-full ${className}`}
     >
       {/* Görsel */}
       <div className="relative h-48 w-full shrink-0">
@@ -27,18 +27,15 @@ const ProjectCard = ({ project, className = "" }: ProjectCardProps) => {
 
       {/* İçerik */}
       <div className="flex flex-col flex-1 p-6 justify-between">
-        {/* Başlık + Açıklama */}
+        {/* Başlık */}
         <div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2 line-clamp-2 min-h-[3.2rem]">
+          <h3 className="text-xl font-semibold text-gray-900 line-clamp-2">
             {project.title}
           </h3>
-          <p className="text-gray-600 text-base line-clamp-2 min-h-[2.8rem]">
-            {project.shortDescription}
-          </p>
         </div>
 
         {/* Buton */}
-        <div className="flex justify-end mt-6">
+        <div className="flex justify-end mt-4">
           <Link
             href={`/projeler/${project.slug}`}
             className="inline-flex items-center border border-green-600 text-green-600 font-medium text-sm px-4 py-2 rounded-md hover:bg-green-50 transition-colors duration-200"

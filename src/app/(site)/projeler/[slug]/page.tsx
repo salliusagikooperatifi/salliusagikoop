@@ -37,15 +37,16 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
     notFound();
   }
 
-  const scrollToSubProjects = () => {
-    const element = document.getElementById("alt-projeler");
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  };
+  // Alt Projeler bölümü yoruma alındığı için bu fonksiyon da yoruma alındı
+  // const scrollToSubProjects = () => {
+  //   const element = document.getElementById("alt-projeler");
+  //   if (element) {
+  //     element.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "start",
+  //     });
+  //   }
+  // };
 
   const parentProject = project.parentId
     ? mockProjects.find((p) => p.id === project.parentId)
@@ -88,12 +89,13 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
                 {project.title}
               </h1>
-              <p className="text-xl text-gray-600 leading-relaxed mb-8">
+              <p className="text-xl text-gray-600 leading-relaxed mb-8 whitespace-pre-line">
                 {project.description}
               </p>
 
               {/* Proje Bilgileri */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Konum bilgisi şimdilik gizlendi */}
+              {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {project.location && (
                   <div className="flex items-center">
                     <svg
@@ -123,37 +125,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
                     </div>
                   </div>
                 )}
-
-                {/* Bütçe ve tarihler şimdilik gizlendi */}
-              </div>
-
-              {/* Alt Projeler Link */}
-              {project.children && project.children.length > 0 && (
-                <div className="mt-8">
-                  <button
-                    onClick={scrollToSubProjects}
-                    className="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition-colors duration-200 group"
-                  >
-                    <span>
-                      Bu ana projenin kapsamında yer alan alt projeler için
-                      tıklayınız
-                    </span>
-                    <svg
-                      className="w-5 h-5 ml-2 transform group-hover:translate-y-1 transition-transform duration-200"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              )}
+              </div> */}
             </div>
 
             {/* Proje Görseli */}
@@ -173,8 +145,8 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
         </Container>
       </Section>
 
-      {/* Proje Özellikleri */}
-      {project.features && project.features.length > 0 && (
+      {/* Proje Özellikleri - Şimdilik gizlendi */}
+      {/* {project.features && project.features.length > 0 && (
         <Section background="gray" padding="sm">
           <Container>
             <div className="text-center mb-12">
@@ -212,10 +184,10 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
             </div>
           </Container>
         </Section>
-      )}
+      )} */}
 
-      {/* Proje Faydaları */}
-      {project.benefits && project.benefits.length > 0 && (
+      {/* Proje Faydaları - Şimdilik gizlendi */}
+      {/* {project.benefits && project.benefits.length > 0 && (
         <Section background="white" padding="sm">
           <Container>
             <div className="text-center mb-12">
@@ -251,10 +223,10 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
             </div>
           </Container>
         </Section>
-      )}
+      )} */}
 
-      {/* Alt Projeler (children) */}
-      {project.children && project.children.length > 0 && (
+      {/* Alt Projeler (children) - Şimdilik gizlendi */}
+      {/* {project.children && project.children.length > 0 && (
         <Section background="white" padding="sm" id="alt-projeler">
           <Container>
             <div className="bg-linear-to-r from-green-50 to-blue-50 p-8 rounded-xl border border-green-200 shadow-lg">
@@ -342,7 +314,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
             </div>
           </Container>
         </Section>
-      )}
+      )} */}
 
       {/* Proje Galerisi */}
       {project.images && project.images.length > 1 && (

@@ -10,9 +10,9 @@ type Props = {
 };
 
 const DEFAULT_TEXTS = [
-  "Bölgemizde sürdürülebilir tarım ve üretim faaliyetlerini destekleyerek, üyelerimizin refahını artırmayı ve toplumsal kalkınmaya katkıda bulunmayı hedefliyoruz.",
-  "Doğaya ve emeğe değer veriyor, yerel üretimi güçlendirerek gelecek nesillere daha yaşanabilir bir çevre bırakmak için çalışıyoruz.",
-  "Birlikte üretiyor, birlikte büyüyoruz. Kooperatif ruhuyla kırsal kalkınmayı destekleyip bölgesel ekonomiye güç katıyoruz.",
+  "Köyümüzde ve bölgemizde kırsal kalkınma ile üretim, istihdam ve katma değer yaratmak için el ele veriyor, yarınlara hazırlanıyoruz.",
+  "Kooperatifimiz; köyümüz ve bölgemizi üretim ve istihdamda devletin teşvik ve desteklerinden yararlandırarak projeler geliştirmek amacıyla kurulmuştur.",
+  "Doğaya ve emeğe değer veriyor, ürettiklerimizi yurt dışı pazarlara taşıyarak köyümüze gelir kaynağı sağlamayı hedefliyoruz.",
 ];
 
 export default function RotatingText({

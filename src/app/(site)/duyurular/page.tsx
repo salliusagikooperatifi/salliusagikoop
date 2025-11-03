@@ -152,6 +152,7 @@ export default async function AnnouncementsPage() {
       </section>
 
       {/* Abone Olma */}
+      {/* Şimdilik gizlendi
       <Section background="green" padding="xl">
         <Container>
           <div className="text-center text-white">
@@ -175,6 +176,7 @@ export default async function AnnouncementsPage() {
           </div>
         </Container>
       </Section>
+    */}
     </div>
   );
 }

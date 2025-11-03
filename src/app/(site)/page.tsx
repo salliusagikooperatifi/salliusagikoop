@@ -93,6 +93,123 @@ export default async function HomePage() {
         </Container>
       </section>
 
+      {/* Kooperatif Amacımız */}
+      <Section background="white" padding="xl">
+        <Container>
+          <div className="max-w-5xl mx-auto">
+            {/* İçerik Kartları */}
+            <div className="space-y-6">
+              {/* Kart 1 */}
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="shrink-0 w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
+                    <svg
+                      className="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                      />
+                    </svg>
+                  </div>
+                  <p className="text-gray-700 text-lg leading-relaxed flex-1">
+                    Köyümüzde ve bölgemizde kırsal kalkınma aracılığı ile
+                    üretim, istihdam ve katma değer yaratmak amacıyla birlikte
+                    el ele vererek yarınlara hazırlanmaktır.
+                  </p>
+                </div>
+              </div>
+
+              {/* Kart 2 */}
+              <div className="bg-gradient-to-r from-blue-50 to-cyan-50 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="shrink-0 w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <svg
+                      className="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                      />
+                    </svg>
+                  </div>
+                  <p className="text-gray-700 text-lg leading-relaxed flex-1">
+                    Kooperatifimiz köyümüz ve bölgemizi üretimde ve istihdamda
+                    devletin tüm teşvik ve desteklerinden yararlanarak çeşitli
+                    projeleri hayata geçirmek için kurulmuştur.
+                  </p>
+                </div>
+              </div>
+
+              {/* Kart 3 */}
+              <div className="bg-gradient-to-r from-amber-50 to-orange-50 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="shrink-0 w-12 h-12 bg-amber-600 rounded-lg flex items-center justify-center">
+                    <svg
+                      className="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </div>
+                  <p className="text-gray-700 text-lg leading-relaxed flex-1">
+                    Doğaya ve emeğe değer vererek ürettiklerimizi yurtdışı
+                    pazarlara taşıyarak Avrupa&apos;daki tüm dostlarımızla
+                    birlikte pazarlayacak ve köyümüze gelir kaynakları sağlamayı
+                    planlıyoruz.
+                  </p>
+                </div>
+              </div>
+
+              {/* Kart 4 - Özel Vurgu */}
+              <div className="bg-gradient-to-r from-green-600 to-emerald-600 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="shrink-0 w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                    <svg
+                      className="w-6 h-6 text-green-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                      />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-white text-lg leading-relaxed font-medium">
+                      Köyümüzde yaşayan yaşamayan tüm Şallıuşaklı canlarımızı
+                      kooperatifimize davet ediyoruz. Kapımız sadece
+                      Şallıuşaklılara açık olacaktır.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
       {/* Öne Çıkan Projeler */}
       <Section background="gray" padding="xl">
         <Container>
@@ -134,73 +251,8 @@ export default async function HomePage() {
         </Container>
       </Section>
 
-      {/* Misyon ve Vizyon */}
-      <Section background="white" padding="xl">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="bg-green-50 p-8 rounded-lg">
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4">
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900">Misyonumuz</h3>
-              </div>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                Bölgemizdeki üreticilerin bir araya gelerek güç birliği
-                yapmasını sağlamak, modern tarım tekniklerini yaygınlaştırmak ve
-                ürünlerin değerli fiyatlarla pazarlanmasını sağlamak.
-              </p>
-            </div>
-            <div className="bg-blue-50 p-8 rounded-lg">
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900">Vizyonumuz</h3>
-              </div>
-              <p className="text-gray-700 text-lg leading-relaxed">
-                Sürdürülebilir tarım ve üretim faaliyetleri ile bölgemizin
-                ekonomik kalkınmasına öncülük etmek, üyelerimizin refahını
-                artırmak ve gelecek nesillere daha yaşanabilir bir çevre
-                bırakmak.
-              </p>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
       {/* Önemli Duyurular */}
-      <Section background="gray" padding="lg">
+      <Section background="white" padding="lg">
         <Container>
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -272,7 +324,7 @@ export default async function HomePage() {
       </Section>
 
       {/* Haberler */}
-      <Section background="white" padding="xl">
+      <Section background="gray" padding="xl">
         <Container>
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -332,12 +384,11 @@ export default async function HomePage() {
                 </svg>
               </div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-3">
-                Henüz haber bulunmamaktadır
+                Haberler
               </h3>
               <p className="text-gray-600 mb-8 max-w-md mx-auto">
-                Kooperatifimizden güncel haberleri ve gelişmeleri yakında
-                paylaşacağız. Tüm haberlerimizi görmek için aşağıdaki butona
-                tıklayabilirsiniz.
+                Kooperatifimizin faaliyetlerine yönelik haberleri buradan takip
+                edebilirsiniz.
               </p>
               <Link
                 href="/haberler"

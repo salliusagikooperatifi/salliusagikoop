@@ -26,62 +26,66 @@ const Header = () => {
         {
           name: "Hayvansal Üretim Projeleri",
           href: "/projeler/hayvansal-uretim",
-          children: [
-            {
-              name: "Büyükbaş Süt",
-              href: "/projeler/buyukbas-sut",
-            },
-            {
-              name: "Büyükbaş Besi",
-              href: "/projeler/buyukbas-besi",
-            },
-            {
-              name: "Küçükbaş",
-              href: "/projeler/kucukbas",
-            },
-          ],
+          // Alt projeler şimdilik gizlendi
+          // children: [
+          //   {
+          //     name: "Büyükbaş Süt",
+          //     href: "/projeler/buyukbas-sut",
+          //   },
+          //   {
+          //     name: "Büyükbaş Besi",
+          //     href: "/projeler/buyukbas-besi",
+          //   },
+          //   {
+          //     name: "Küçükbaş",
+          //     href: "/projeler/kucukbas",
+          //   },
+          // ],
         },
         {
           name: "Bitkisel Üretim Projeleri",
           href: "/projeler/bitkisel-uretim",
-          children: [
-            {
-              name: "Seracılık",
-              href: "/projeler/seracilik",
-            },
-            {
-              name: "Meyve Bahçesi",
-              href: "/projeler/meyve-bahcesi",
-            },
-          ],
+          // Alt projeler şimdilik gizlendi
+          // children: [
+          //   {
+          //     name: "Seracılık",
+          //     href: "/projeler/seracilik",
+          //   },
+          //   {
+          //     name: "Meyve Bahçesi",
+          //     href: "/projeler/meyve-bahcesi",
+          //   },
+          // ],
         },
         {
           name: "Tarımsal Sanayi Projeleri",
           href: "/projeler/tarimsal-sanayi",
-          children: [
-            {
-              name: "Süt Toplama ve Soğutma Merkezi",
-              href: "/projeler/sut-toplama-ve-sogutma-merkezi",
-            },
-            {
-              name: "Zeytinyağı Üretim Tesisi",
-              href: "/projeler/zeytinyagi-uretim-tesisi",
-            },
-            {
-              name: "Fıstık Çıtlatma ve Paketleme Tesisi",
-              href: "/projeler/fistik-citlatma-ve-paketleme-tesisi",
-            },
-          ],
+          // Alt projeler şimdilik gizlendi
+          // children: [
+          //   {
+          //     name: "Süt Toplama ve Soğutma Merkezi",
+          //     href: "/projeler/sut-toplama-ve-sogutma-merkezi",
+          //   },
+          //   {
+          //     name: "Zeytinyağı Üretim Tesisi",
+          //     href: "/projeler/zeytinyagi-uretim-tesisi",
+          //   },
+          //   {
+          //     name: "Fıstık Çıtlatma ve Paketleme Tesisi",
+          //     href: "/projeler/fistik-citlatma-ve-paketleme-tesisi",
+          //   },
+          // ],
         },
         {
           name: "El Sanatları Halı-Kilim Üretim Projeleri",
           href: "/projeler/el-sanatlari-hali-kilim",
-          children: [
-            {
-              name: "El Sanatları Üretim Merkezi",
-              href: "/projeler/el-sanatlari-uretim-merkezi",
-            },
-          ],
+          // Alt projeler şimdilik gizlendi
+          // children: [
+          //   {
+          //     name: "El Sanatları Üretim Merkezi",
+          //     href: "/projeler/el-sanatlari-uretim-merkezi",
+          //   },
+          // ],
         },
         {
           name: "Eğitim ve Spor Merkezi Projeleri",
@@ -154,7 +158,8 @@ const Header = () => {
                           >
                             {subItem.name}
                           </Link>
-                          {subItem.children && (
+                          {/* Alt projeler şimdilik gizlendi */}
+                          {/* {subItem.children && (
                             <div className="pl-4 pb-2">
                               {subItem.children.map((child) => (
                                 <Link
@@ -170,7 +175,7 @@ const Header = () => {
                                 </Link>
                               ))}
                             </div>
-                          )}
+                          )} */}
                         </div>
                       ))}
                     </div>
@@ -283,7 +288,8 @@ const Header = () => {
                           >
                             {subItem.name}
                           </Link>
-                          {subItem.children && (
+                          {/* Alt projeler şimdilik gizlendi */}
+                          {/* {subItem.children && (
                             <div className="pl-3">
                               {subItem.children.map((child) => (
                                 <Link
@@ -300,7 +306,7 @@ const Header = () => {
                                 </Link>
                               ))}
                             </div>
-                          )}
+                          )} */}
                         </div>
                       ))}
                     </div>
