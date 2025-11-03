@@ -1,0 +1,41 @@
+name: Supabase Heartbeat
+
+# Her 6 günde bir çalışır (Supabase free tier 7 günde pause olur)
+# Ayrıca manuel tetikleme de mümkün
+on:
+  schedule:
+    # Her 6 günde bir saat 12:00'de (UTC) çalışır
+    # Cron: dakika saat gün ay haftanın_günü
+    - cron: "0 12 */6 * *"
+
+  # Manuel tetikleme için
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping Heartbeat Endpoint
+        run: |
+          echo "🔄 Supabase heartbeat başlatılıyor..."
+          echo "Zaman: $(date)"
+
+          # Heartbeat endpoint'ini çağır
+          response=$(curl -s -w "\n%{http_code}" https://salliusagicoop.vercel.app/api/heartbeat)
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | head -n-1)
+
+          echo "HTTP Status: $http_code"
+          echo "Response: $body"
+
+          if [ "$http_code" -eq 200 ]; then
+            echo "✅ Heartbeat başarılı!"
+          else
+            echo "❌ Heartbeat başarısız!"
+            exit 1
+          fi
+
+      - name: Sonuç
+        if: success()
+        run: echo "🎉 Supabase projesi aktif tutuldu!"
