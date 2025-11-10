@@ -111,26 +111,14 @@ export default function ContactPage() {
                     <h3 className="text-xl font-semibold text-gray-900 mb-4">
                       E-posta
                     </h3>
-                    <div className="space-y-2">
-                      <p className="text-gray-600">
-                        <a
-                          href={`mailto:${contactInfo.email.primary}`}
-                          className="hover:text-green-600 transition-colors"
-                        >
-                          {contactInfo.email.primary}
-                        </a>
-                      </p>
-                      {contactInfo.email.info && (
-                        <p className="text-gray-600">
-                          <a
-                            href={`mailto:${contactInfo.email.info}`}
-                            className="hover:text-green-600 transition-colors"
-                          >
-                            {contactInfo.email.info}
-                          </a>
-                        </p>
-                      )}
-                    </div>
+                    <p className="text-gray-600">
+                      <a
+                        href={`mailto:${contactInfo.email.primary}`}
+                        className="hover:text-green-600 transition-colors"
+                      >
+                        {contactInfo.email.primary}
+                      </a>
+                    </p>
                   </div>
                 </div>
               </div>

@@ -605,9 +605,7 @@ export const contactInfo: ContactInfo = {
     fax: "+90 312 123 45 69",
   },
   email: {
-    primary: "info@salliusagikoop.com",
-    info: "salliusagikooperatifi@gmail.com",
-    support: "destek@salliusagikoop.com",
+    primary: "salliusagikooperatifi@gmail.com",
   },
   socialMedia: {
     facebook: "https://facebook.com/salliusagikoop",

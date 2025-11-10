@@ -147,10 +147,10 @@ const Footer = () => {
                         {"type" in link && link.type === "email" && (
                           <div>
                             <a
-                              href="mailto:info@salliusagicoop.com"
+                              href={`mailto:${contactInfo.email.primary}`}
                               className="hover:text-white transition-colors text-gray-400 text-sm"
                             >
-                              info@salliusagicoop.com
+                              {contactInfo.email.primary}
                             </a>
                           </div>
                         )}
