@@ -20,9 +20,9 @@ jobs:
         env:
           # GitHub Secrets'tan URL al (Settings → Secrets → Actions → New repository secret)
           # Secret adı: HEARTBEAT_URL
-          # Değer: https://salliusagi-kooperatifi.org.tr/api/heartbeat
+          # Değer: https://www.salliusagi-kooperatifi.org.tr/api/heartbeat
           # Eğer secret yoksa fallback URL kullanır
-          HEARTBEAT_URL: ${{ secrets.HEARTBEAT_URL || 'https://salliusagi-kooperatifi.org.tr/api/heartbeat' }}
+          HEARTBEAT_URL: ${{ secrets.HEARTBEAT_URL || 'https://www.salliusagi-kooperatifi.org.tr/api/heartbeat' }}
         run: |
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           echo "🔄 Supabase heartbeat başlatılıyor..."
@@ -31,6 +31,7 @@ jobs:
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
           # Retry mekanizmasıyla endpoint'i çağır
+          # -L: Redirect'leri takip et (www yönlendirmesi için)
           # --retry 3: Hata durumunda 3 kere daha dene
           # --retry-delay 5: Denemeler arası 5 saniye bekle
           # --retry-all-errors: Tüm hata tiplerinde retry yap
@@ -40,6 +41,7 @@ jobs:
           # -w: HTTP status code'u ayrı satırda yaz
 
           response=$(curl -s -w "\n%{http_code}" \
+            -L \
             --retry 3 \
             --retry-delay 5 \
             --retry-all-errors \
