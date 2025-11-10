@@ -20,9 +20,9 @@ jobs:
         env:
           # GitHub Secrets'tan URL al (Settings → Secrets → Actions → New repository secret)
           # Secret adı: HEARTBEAT_URL
-          # Değer: https://salliusagikoop.vercel.app/api/heartbeat
+          # Değer: https://salliusagi-kooperatifi.org.tr/api/heartbeat
           # Eğer secret yoksa fallback URL kullanır
-          HEARTBEAT_URL: ${{ secrets.HEARTBEAT_URL || 'https://salliusagikoop.vercel.app/api/heartbeat' }}
+          HEARTBEAT_URL: ${{ secrets.HEARTBEAT_URL || 'https://salliusagi-kooperatifi.org.tr/api/heartbeat' }}
         run: |
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           echo "🔄 Supabase heartbeat başlatılıyor..."
